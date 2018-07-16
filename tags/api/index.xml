@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Api on 记忆和记忆的补完</title>
+    <link>http://LonglyCode.github.io/tags/api/</link>
+    <description>Recent content in Api on 记忆和记忆的补完</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>LonglyCode</copyright>
+    <lastBuildDate>Fri, 19 Feb 2016 23:36:37 +0000</lastBuildDate>
+    
+	<atom:link href="http://LonglyCode.github.io/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>emacs完全补完计划(四)--API大考古</title>
+      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</link>
+      <pubDate>Fri, 19 Feb 2016 23:36:37 +0000</pubDate>
+      
+      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</guid>
+      <description>&lt;!-- toc --&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

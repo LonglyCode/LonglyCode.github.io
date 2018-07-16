@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Org-mode个人总结 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content=" 这是一份个人总结，并不能带你入门，我也曾尝试些一个教程，但不自信比这个中文教程好：Org-mode 简明手册，翻译官方的 mini manual，有个最佳实践 organize your life plain text。Org 用来做 GTD 是极好的，它的绝对优势就是完全是纯文本的，所有的格式状态都是由一些符号和特殊字符组成，不依赖于任何的数据库，而且可自定义的东西太多，因为是纯文本的，许多格式定义可以都涉及到一些程序通用的表达式，对于程序猿是非常友好的，但对于普通人需要一定的学习成本。本文提炼了Org常用的功能和设置，作为备忘记录。
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Org-mode个人总结" />
+<meta property="og:description" content="
+
+
+这是一份个人总结，并不能带你入门，我也曾尝试些一个教程，但不自信比这个中文教程好：Org-mode 简明手册，翻译官方的 mini manual，有个最佳实践 organize your life plain text。Org 用来做 GTD 是极好的，它的绝对优势就是完全是纯文本的，所有的格式状态都是由一些符号和特殊字符组成，不依赖于任何的数据库，而且可自定义的东西太多，因为是纯文本的，许多格式定义可以都涉及到一些程序通用的表达式，对于程序猿是非常友好的，但对于普通人需要一定的学习成本。本文提炼了Org常用的功能和设置，作为备忘记录。
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" />
+
+
+
+<meta property="article:published_time" content="2016-01-25T22:48:14&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-01-25T22:48:14&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Org-mode个人总结">
+<meta itemprop="description" content="
+
+
+这是一份个人总结，并不能带你入门，我也曾尝试些一个教程，但不自信比这个中文教程好：Org-mode 简明手册，翻译官方的 mini manual，有个最佳实践 organize your life plain text。Org 用来做 GTD 是极好的，它的绝对优势就是完全是纯文本的，所有的格式状态都是由一些符号和特殊字符组成，不依赖于任何的数据库，而且可自定义的东西太多，因为是纯文本的，许多格式定义可以都涉及到一些程序通用的表达式，对于程序猿是非常友好的，但对于普通人需要一定的学习成本。本文提炼了Org常用的功能和设置，作为备忘记录。
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-01-25T22:48:14&#43;00:00" />
+<meta itemprop="dateModified" content="2016-01-25T22:48:14&#43;00:00" />
+<meta itemprop="wordCount" content="1845">
+
+
+
+<meta itemprop="keywords" content="emacs,tutorial," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Org-mode个人总结"/>
+<meta name="twitter:description" content="
+
+
+这是一份个人总结，并不能带你入门，我也曾尝试些一个教程，但不自信比这个中文教程好：Org-mode 简明手册，翻译官方的 mini manual，有个最佳实践 organize your life plain text。Org 用来做 GTD 是极好的，它的绝对优势就是完全是纯文本的，所有的格式状态都是由一些符号和特殊字符组成，不依赖于任何的数据库，而且可自定义的东西太多，因为是纯文本的，许多格式定义可以都涉及到一些程序通用的表达式，对于程序猿是非常友好的，但对于普通人需要一定的学习成本。本文提炼了Org常用的功能和设置，作为备忘记录。
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Org-mode个人总结</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-01-25 </span>
+        
+        <span class="more-meta"> 1845 words </span>
+        <span class="more-meta"> 4 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#强调">强调</a></li>
+<li><a href="#视图">视图</a>
+<ul>
+<li><a href="#稀疏疏">稀疏疏</a></li>
+<li><a href="#议程视图">议程视图</a></li>
+</ul></li>
+<li><a href="#转移">转移</a>
+<ul>
+<li><a href="#归档">归档</a></li>
+<li><a href="#转送笔记">转送笔记</a></li>
+<li><a href="#捕捉">捕捉</a></li>
+<li><a href="#时间戳">时间戳</a></li>
+</ul></li>
+<li><a href="#常用的可以自定义的函数或者变量">常用的可以自定义的函数或者变量</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<blockquote>
+<p>这是一份个人总结，并不能带你入门，我也曾尝试些一个教程，但不自信比这个中文教程好：<a href="http://www.cnblogs.com/Open_Source/archive/2011/07/17/2108747.html">Org-mode 简明手册</a>，翻译官方的 <a href="http://orgmode.org/manual">mini manual</a>，有个最佳实践 <a href="http://doc.norang.ca/org-mode.html">organize your life plain text</a>。Org 用来做 GTD 是极好的，它的绝对优势就是完全是纯文本的，所有的格式状态都是由一些符号和特殊字符组成，不依赖于任何的数据库，而且可自定义的东西太多，因为是纯文本的，许多格式定义可以都涉及到一些程序通用的表达式，对于程序猿是非常友好的，但对于普通人需要一定的学习成本。本文提炼了Org常用的功能和设置，作为备忘记录。</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="强调">强调</h2>
+
+<p>强调基本和其他的富文本的格式相同，有时会忘记，先记下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span></pre></td>
+<td class="lntd">
+<pre class="chroma">*粗体*
+/斜体/
++删除线+
+_下划线_
+下标：H_2 O(这里必须留一个空格要不然 2 和 O 都成为小标，目前还不知道怎么去掉空格)
+上标：E=mc^2
+等宽字：  =git=</pre></td></tr></table>
+</div>
+</div>
+<h2 id="视图">视图</h2>
+
+<h3 id="稀疏疏">稀疏疏</h3>
+
+<p>主要是针对本文件</p>
+
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>C-c /</td>
+<td>稀疏树的创建命令</td>
+</tr>
+
+<tr>
+<td>C-c / r</td>
+<td>其中一项，会提示输入匹配串，所有的匹配项都会高亮</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="议程视图">议程视图</h3>
+
+<blockquote>
+<p>调用命令：M-x org-agenda，然后会有提示执行对应的命令</p>
+</blockquote>
+
+<ol>
+<li>周/日议程</li>
+<li>全局 TODO 列表</li>
+<li>匹配标签和属性</li>
+<li>单文件的时间轴</li>
+<li>查找视图</li>
+</ol>
+
+<h2 id="转移">转移</h2>
+
+<h3 id="归档">归档</h3>
+
+<blockquote>
+<p>命令:M-x org-achive-x，可以为 subtree,file 甚至 agenda 等等
+当一个条目完成时想从当前项目去除的时候，可以定制归档地址</p>
+</blockquote>
+
+<h3 id="转送笔记">转送笔记</h3>
+
+<blockquote>
+<p>命令:M-x org-refile，refille 可以顾名思义，重新定义当前条目的 file 归属
+一个条目转移到另外一个工程里面时可以用到 转送 ，同样可以定义转送目标地址</p>
+</blockquote>
+
+<h3 id="捕捉">捕捉</h3>
+
+<blockquote>
+<p>M-x org-capture
+在编辑过程中突然冒出一个想法，可以用这个中断当前的工作，可以通过自定义模板定义分类和地址</p>
+</blockquote>
+
+<h3 id="时间戳">时间戳</h3>
+
+<p>时间戳是一个具有特定格式的日期，可以出现在树条目的标题和正文的任何地方。</p>
+
+<ol>
+<li>最简单的：时间+时间</li>
+
+<li><p>时间按规律重复：N 天（d）、周（w）、月（m）、年（y），会在时间点后面加个尾巴，称作中继器，比如：
+<code>&lt;2015-07-29 周三 +1w&gt;</code></p>
+
+<p>注意看后面的+1w，代表每个周（w）都要重复，直到<code>&lt;2015-07-29 周三&gt;</code>为止，在 weekly agenda 里面查看时候会一直有这一项</p></li>
+
+<li><p>时间/日期段 连续输入时间戳的时候自动生成一个时间段 <code>&lt;2015-07-29 周三&gt;–&lt;2015-09-01 周二&gt;</code></p></li>
+
+<li><p>非激活的时间戳 跟普通的时间一样，只不过它不被激活，即不会出现在议程当中 关于时间戳的快捷键：</p></li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>C-c .</td>
+<td>创建时间，如果连续使用则会自动将两个时间连接成时间段</td>
+</tr>
+
+<tr>
+<td>C-c !</td>
+<td>未激活的时间戳</td>
+</tr>
+
+<tr>
+<td>S-left/right</td>
+<td>改变时间戳的一天</td>
+</tr>
+
+<tr>
+<td>S-UP/DOWN</td>
+<td>将光标置于时间戳的年月日之上，则修改相应时间</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>C-c C-d</td>
+<td>在标题下面插入”DEADLINE”关键字的时间戳</td>
+</tr>
+
+<tr>
+<td>C-c C-s</td>
+<td>同上，为”SCHEDULED”</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>C-c C-x C-！</td>
+<td>开始计时（CLOCK-IN), 加 C-u 前缀，从当前计时的任务当中选择任务？</td>
+</tr>
+
+<tr>
+<td>C-c C-x C-o</td>
+<td>停止计时（CLOCK-OUT),会计算时间在时间段后面插入</td>
+</tr>
+
+<tr>
+<td>C-c C-x C-e</td>
+<td>为当前计时任务更新进度</td>
+</tr>
+
+<tr>
+<td>C-c C-x C-x</td>
+<td>取消计时</td>
+</tr>
+
+<tr>
+<td>C-c C-x C-j</td>
+<td>跳转到当前计时的任务条目</td>
+</tr>
+
+<tr>
+<td>C-c C-x C-r</td>
+<td>插入 org 表格统计计时报告</td>
+</tr>
+
+<tr>
+<td>C-c C-c</td>
+<td>如果有上面的计时报告则更新它，需要置于首行，即#+BEGIN:</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="常用的可以自定义的函数或者变量">常用的可以自定义的函数或者变量</h2>
+
+<ol>
+<li>org-startup-folded，设置为 t 默认打开文件的时候自动展开折叠</li>
+
+<li><p>org-log-into-drawer 和 org-todo-keywords 前者可以跟踪 TODO 条目状态变化
+WAIT(w@/!) 注意看括号里面，w 代表改成 WAIT 状态时候的快捷键，”!”代表转变状态的时候会做一个时间戳，”@”代表做一个一个记录。 所以改为 DONE 的时候会有时间戳，CANCELED 会有一个记录 后者则定义除了 TODO 和 DONE 外的状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq</span> <span class="nv">org-todo-keywords</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="nv">sequence</span> <span class="s">&#34;TODO(t)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;DONE(d)&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;REPORT(r!)&#34;</span> <span class="s">&#34;BUG(b)&#34;</span> <span class="s">&#34;KNOWNCAUSE(k)&#34;</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;FIXED(f)&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">sequence</span> <span class="s">&#34;|&#34;</span> <span class="s">&#34;CANCELED(c@)&#34;</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其中用”|”来分割不同的状态，同样可以使用”!”和”@”语法，上面的转变成 REPORT 会有时间戳在条目下面</p></li>
+
+<li><p>org-tag-alist 指定 tag 值免得每次都要重新输入一大堆的东西，此为 alist，可以用相关的 list 函数添加:
+其中?w 就代表字母 w,当你改变或者新增 tag 的关键字，按下 w 则，会输入”@work”的 tag</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq</span> <span class="nv">org-tag-alist</span> <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;@work&#34;</span> <span class="o">.</span> <span class="nv">?w</span><span class="p">)</span> <span class="p">(</span><span class="s">&#34;@home&#34;</span> <span class="o">.</span> <span class="nv">?h</span><span class="p">)</span> <span class="p">(</span><span class="s">&#34;laptop&#34;</span> <span class="o">.</span> <span class="nv">?l</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>org-tags-match-list-sublevels 用于定义议程文件匹配的标签一个全局列表</p></li>
+
+<li><p>org-refile-targets 设置转送笔记的目标地址</p></li>
+
+<li><p>org-archivelocation 设置归档位置</p></li>
+
+<li><p>org-agenda-files 设置议程文件</p></li>
+
+<li><p>org-capture-templates 设置捕获模板</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq</span> <span class="nv">org-capture-templates</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;t&#34;</span> <span class="s">&#34;Todo&#34;</span> <span class="nv">entry</span> <span class="p">(</span><span class="nv">file+headline</span> <span class="s">&#34;~/org/gtd.org&#34;</span> <span class="s">&#34;Tasks&#34;</span><span class="p">)</span>
+<span class="s">&#34;* TODO %?\n %i\n %a&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#34;j&#34;</span> <span class="s">&#34;Journal&#34;</span> <span class="nv">entry</span> <span class="p">(</span><span class="nv">file+datetree</span> <span class="s">&#34;~/org/journal.org&#34;</span><span class="p">)</span>
+<span class="s">&#34;* %?\nEntered on %U\n %i\n %a&#34;</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>定义两个模板</p></li>
+
+<li><p>org-agenda-custom-commands 自定义议程视图搜索</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq</span> <span class="nv">org-agenda-custom-commands</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;w&#34;</span> <span class="nv">todo</span> <span class="s">&#34;WAITING&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#34;u&#34;</span> <span class="nv">tags</span> <span class="s">&#34;+boss-urgent&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#34;v&#34;</span> <span class="nv">tags-todo</span> <span class="s">&#34;+boss-urgent&#34;</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>第一项为关键字，可以选择范围 tags 或 todo 项，最后为搜索关键字 搜索字符串可以使用 ‘&amp;’ 作与运算， ‘|’ 作或运算。‘&amp;’ 的约束力比 ‘|’ 的强</p></li>
+
+<li><p>org-startup-indented 缩进相关</p></li>
+
+<li><p>org-structure-template-alist 定义元数据的模板，下面为默认模板:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="s">&#34;e&#34;</span> <span class="s">&#34;#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE&#34;</span> <span class="s">&#34;&lt;example&gt;\n?\n&lt;/example&gt;&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其中”e”代表你&lt;e 时候会自动补全接下的内容，最后也可以看出元数据其实是定义了一些 html 节点，其中”?”为内容的占位符。</p></li>
+
+<li><p>(setq org-agenda-start-day “+2d”)可以显示未来两天的议程。</p></li>
+
+<li><p>org-todo-keyword-faces 可以定义 TODO 状态的颜色显示各种显示等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">setq</span> <span class="nv">org-todo-keyword-faces</span>
+  <span class="o">&#39;</span><span class="p">((</span><span class="s">&#34;TODO&#34;</span> <span class="o">.</span> <span class="nv">org-warning</span><span class="p">)(</span><span class="s">&#34;STARTED&#34;</span> <span class="o">.</span> <span class="s">&#34;black&#34;</span><span class="p">)</span>
+  <span class="p">(</span><span class="s">&#34;CANCELED&#34;</span> <span class="o">.</span> <span class="p">(</span><span class="ss">:foreground</span> <span class="s">&#34;yellow&#34;</span> <span class="ss">:weight</span> <span class="nv">bold</span><span class="p">))))</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-01-25</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/emacs/">emacs</a>
+          
+          <a href="/tags/tutorial/">tutorial</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">emacs完全补完计划（一）——嘴炮和入门</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/">
+            <span class="next-text nav-default">git使用小结</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

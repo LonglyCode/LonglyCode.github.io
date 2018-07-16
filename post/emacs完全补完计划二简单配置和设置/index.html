@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>emacs完全补完计划（二）——简单配置和设置 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content="我们在谈论lisp的时候谈论什么？  很多emacs教程都想避开Emacs Lisp(下面简称elisp)，完全不可能，反而学习过程中会磕磕碰碰。其实lisp作为一个古老的语言，语法上确实相比现代语言看起来看起来怪异很多，但并不落后，反而有独到之处，简洁易懂。在函数式编程复兴的浪潮中，去了解函数编程的始祖显得意义非凡。之后的内容在配置过程中不断回顾elisp的语法和用法，先提三点：
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="emacs完全补完计划（二）——简单配置和设置" />
+<meta property="og:description" content="
+
+我们在谈论lisp的时候谈论什么？
+
+
+很多emacs教程都想避开Emacs Lisp(下面简称elisp)，完全不可能，反而学习过程中会磕磕碰碰。其实lisp作为一个古老的语言，语法上确实相比现代语言看起来看起来怪异很多，但并不落后，反而有独到之处，简洁易懂。在函数式编程复兴的浪潮中，去了解函数编程的始祖显得意义非凡。之后的内容在配置过程中不断回顾elisp的语法和用法，先提三点：
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/" />
+
+
+
+<meta property="article:published_time" content="2016-02-01T23:34:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-02-01T23:34:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="emacs完全补完计划（二）——简单配置和设置">
+<meta itemprop="description" content="
+
+我们在谈论lisp的时候谈论什么？
+
+
+很多emacs教程都想避开Emacs Lisp(下面简称elisp)，完全不可能，反而学习过程中会磕磕碰碰。其实lisp作为一个古老的语言，语法上确实相比现代语言看起来看起来怪异很多，但并不落后，反而有独到之处，简洁易懂。在函数式编程复兴的浪潮中，去了解函数编程的始祖显得意义非凡。之后的内容在配置过程中不断回顾elisp的语法和用法，先提三点：
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-02-01T23:34:00&#43;00:00" />
+<meta itemprop="dateModified" content="2016-02-01T23:34:00&#43;00:00" />
+<meta itemprop="wordCount" content="3491">
+
+
+
+<meta itemprop="keywords" content="emacs,IDE," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="emacs完全补完计划（二）——简单配置和设置"/>
+<meta name="twitter:description" content="
+
+我们在谈论lisp的时候谈论什么？
+
+
+很多emacs教程都想避开Emacs Lisp(下面简称elisp)，完全不可能，反而学习过程中会磕磕碰碰。其实lisp作为一个古老的语言，语法上确实相比现代语言看起来看起来怪异很多，但并不落后，反而有独到之处，简洁易懂。在函数式编程复兴的浪潮中，去了解函数编程的始祖显得意义非凡。之后的内容在配置过程中不断回顾elisp的语法和用法，先提三点：
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">emacs完全补完计划（二）——简单配置和设置</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-02-01 </span>
+        
+        <span class="more-meta"> 3491 words </span>
+        <span class="more-meta"> 7 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#我们在谈论lisp的时候谈论什么">我们在谈论lisp的时候谈论什么？</a>
+<ul>
+<li><a href="#操作符前置">操作符前置</a></li>
+<li><a href="#数据结构">数据结构</a></li>
+<li><a href="#返回机制">返回机制</a></li>
+</ul></li>
+<li><a href="#配置文件位置">配置文件位置</a></li>
+<li><a href="#常见配置方法">常见配置方法</a>
+<ul>
+<li><a href="#nil-和-t"><code>nil</code> 和 <code>t</code></a></li>
+<li><a href="#require"><code>require</code></a></li>
+<li><a href="#setq"><code>setq</code></a></li>
+<li><a href="#add-to-list"><code>add-to-list</code></a></li>
+<li><a href="#add-hook"><code>add-hook</code></a></li>
+<li><a href="#global-set-key-define-key-以及-kbd"><code>global-set-key</code>、<code>define-key</code> 以及<code>kbd</code></a></li>
+</ul></li>
+<li><a href="#一份通用配置说明">一份通用配置说明</a></li>
+<li><a href="#内置的自定义方法">内置的自定义方法</a></li>
+<li><a href="#本文参考">本文参考</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<h2 id="我们在谈论lisp的时候谈论什么">我们在谈论lisp的时候谈论什么？</h2>
+
+<blockquote>
+<p>很多emacs教程都想避开Emacs Lisp(下面简称elisp)，完全不可能，反而学习过程中会磕磕碰碰。其实lisp作为一个古老的语言，语法上确实相比现代语言看起来看起来怪异很多，但并不落后，反而有独到之处，简洁易懂。在函数式编程复兴的浪潮中，去了解函数编程的始祖显得意义非凡。之后的内容在配置过程中不断回顾elisp的语法和用法，先提三点：</p>
+</blockquote>
+
+<p></p>
+
+<h3 id="操作符前置">操作符前置</h3>
+
+<p>程序的本质是什么，无非是数据本身和操作数据过程。lisp把操作数据的“操作符”前置了，比如平常计算多个数加法的时候用 <strong>1+2+3+4+5</strong>，lisp这样做： <strong>(+ 1 2 3 4 5)</strong>，括号是lisp的特性，左括号的往右的第一个字符就是所谓的“操作符”，用空格来区别不同的参数。这样做有什么好处？现代语言因为更偏向自然语言，操作符的位置更加灵活，比如调用一个方法的时候：<code>object.method(args)</code>，方法需要一个对象支撑，自己变成了附庸品，后置了；几乎所有连接字符串都可以这么操作：<code>&quot;HE&quot;+&quot;LLO&quot;+&quot;WORLD&quot;</code>，操作符<code>+</code>位于中间；还有最后一种情况，常见的 <code>Assert statement</code> 或者内置函数调用 <code>ABS(num)</code>又把操作符前置了，在操作符使用过程中混乱不协调，容易迷惑然后出错，所以灵活也有它的弊端。括号和操作符前置两个特性让lisp独特而优雅，组成了为人称道的S-expression(S表达式)，以后还会提及它的好处。</p>
+
+<h3 id="数据结构">数据结构</h3>
+
+<p>将操作符前置是高度统一又美好理想的理念(别给我扯汇编)，因为纯数据的存在导致不可能所有括号里面的最左边都是操作符。lisp其实叫做列表处理语言，这里就引出了lisp里面最基础的数据结构&ndash;list，还有它的组成元素atom(原子)。其实我们已经见过了list就是<strong>(+ 1 2 3 4 5)</strong>，只有在括号括起来的表达式就叫做一个list，里面的元素只要不是另外一个list就叫做原子(atom)，意为不能再分解的意思。那么纯数据该怎么表示？像这样<code>(1 2 3 4 5 )</code>，显然不符合操作符前置的原则，会报错说找不到名为<code>1</code>的函数，于是考虑再三就把操作符扩充到了括号之外，变成<code>'(1 2 3 4 5)</code>表示整个括号里面不执行，直接返回整个list。像<strong>(+ 1 2 3 4 5)</strong>这样的list会执行，返回值为15；而<code>'(+ 1 2 3 4 5)</code>会直接返回(+ 1 2 3 4 5)本身。</p>
+
+<h3 id="返回机制">返回机制</h3>
+
+<p>上面提到了返回，在其他大部分的语言里需要一个关键字<code>return</code>来实现，而lisp只要遇到括号就代表自动返回值，可以执行括号内容后返回，也可以根据括号前面的<code>'</code>单引号只返回括号本身。这时候就有人想在返回的时候部分内容能够执行就好了，比如<code>(5 (* 2 5) 15 20)</code>，如果返回的时候里面的表达式<code>(* 2 5)</code>能直接执行的话整个表达式就能返回<code>(5 10 15 20)</code>这样的数列。于是就有人想出了用外层的括号来控制内层的括号，变成<strong>`(5 ,(* 2 5) 15 20)</strong>，外层加个反引号内层加个逗号就能返回以5为倍数的数列了。</p>
+
+<h2 id="配置文件位置">配置文件位置</h2>
+
+<p>在linux 下，<code>sudo touch ~/emacs.d/init.el</code>，其中<strong>init.el</strong>文件是emacs 配置文件，用elisp写的文件都以el为拓展名。
+在window下新建一个文件夹<code>C:\Users\username\AppData\Roaming\.emacs.d</code>，其中username为本机的名字，在这个文件夹下新建一个init.txt，把它改为init.el即可。</p>
+
+<h2 id="常见配置方法">常见配置方法</h2>
+
+<blockquote>
+<p>在这节只会提及一些elisp常见的关键字，这些关键字经常会困扰着新手，首先要知道elisp用<code>-</code>来连接声明不同功用的变量名和函数名的。</p>
+</blockquote>
+
+<h3 id="nil-和-t"><code>nil</code> 和 <code>t</code></h3>
+
+<p>nil和t在elisp里面分别代表着false和true，用单个字母<code>t</code>来代表true让人措手不及。和其他语言一样，正整数也表示true，负整数表示false。</p>
+
+<h3 id="require"><code>require</code></h3>
+
+<p>顾名思义它的作用就是引用包，后面一般加着包名，至于具体的设置和用法会在下一篇文章详细分析，只要知道它和其他语言中的import，require一样把其他模块或者包的上下文空间引入当前文件下。</p>
+
+<h3 id="setq"><code>setq</code></h3>
+
+<p>setq作用是赋值，一般这么用(setq variable value)，比如<code>(setq kill-ring-max 200)</code>让emacs剪切板存放的条目数上限为200。</p>
+
+<h3 id="add-to-list"><code>add-to-list</code></h3>
+
+<p>添加一个元素到某个list里面，这样用<code>(add-to-list LIST ELEMENT)</code>。也可以看出除了用单个变量来控制某种配置外，emacs里面还存在各种list这种容器式数据结构，用来映射或者存放一组变量。</p>
+
+<h3 id="add-hook"><code>add-hook</code></h3>
+
+<p>添加钩子，比如(add-hook &lsquo;window-setup-hook &lsquo;toggle-frame-maximized)，作用是当window启动的时候frame最大化。在添加钩子的时候要查看是否有以<code>-hook</code>结尾的函数。</p>
+
+<h3 id="global-set-key-define-key-以及-kbd"><code>global-set-key</code>、<code>define-key</code> 以及<code>kbd</code></h3>
+
+<p><code>kbd</code>是一个宏，至于什么是宏，我们先暂按不说，它的存在就是为简化定义一系列按键输入（键序列），比如(kbd &ldquo;C-x C-f&rdquo;)会返回control+c 然后control+f的输入操作。<code>global-set-key</code>用来定义按键绑定的函数，之前提到过emacs里面的任何操作都是由一个或者多个函数组成，结合上面的<code>kbd</code>宏，emacs这样定义的一个按键的功能——<code>(global-set-key (kbd &quot;C-x C-f&quot;) 'find-file)</code>。那么<code>define-key</code>又是什么？global-set-key显而易见是用来定义全局的，针对于整个emacs而言的，污染性太大，define-key则用来定义针对某个mode才有的按键，也就是说当我们进入到某个mode的时候这个按键才生效。常见用法<code>(define-key keymap function)</code>，keymap保管了key和function的映射表，一般每个mode都会提供了一个keymap用于用户自定义。
+如果不知道自己输入的键序列在<code>kbd</code>里面是怎么写的，可以使用<code>C-h k</code>来查看有没有此键序列的绑定，如果没有绑定任何的函数会返回这个键序列本身，就是写入<code>kbd</code>里面的内容。</p>
+
+<h2 id="一份通用配置说明">一份通用配置说明</h2>
+
+<blockquote>
+<p>这份配置几乎可以说是最基本的配置，没有安装其他的package，仅仅是内置和外观方面的设置。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span><span class="lnt">13</span><span class="lnt">14</span><span class="lnt">15</span><span class="lnt">16</span><span class="lnt">17</span><span class="lnt">18</span><span class="lnt">19</span><span class="lnt">20</span><span class="lnt">21</span><span class="lnt">22</span><span class="lnt">23</span><span class="lnt">24</span><span class="lnt">25</span><span class="lnt">26</span><span class="lnt">27</span><span class="lnt">28</span><span class="lnt">29</span><span class="lnt">30</span><span class="lnt">31</span><span class="lnt">32</span><span class="lnt">33</span><span class="lnt">34</span><span class="lnt">35</span><span class="lnt">36</span><span class="lnt">37</span><span class="lnt">38</span><span class="lnt">39</span><span class="lnt">40</span><span class="lnt">41</span><span class="lnt">42</span><span class="lnt">43</span><span class="lnt">44</span><span class="lnt">45</span><span class="lnt">46</span><span class="lnt">47</span><span class="lnt">48</span><span class="lnt">49</span><span class="lnt">50</span><span class="lnt">51</span><span class="lnt">52</span><span class="lnt">53</span><span class="lnt">54</span><span class="lnt">55</span><span class="lnt">56</span><span class="lnt">57</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;禁止菜单栏</span>
+<span class="p">(</span><span class="nv">menu-bar-mode</span> <span class="mi">-1</span><span class="p">)</span>
+<span class="c1">;;禁止显示工具栏</span>
+<span class="p">(</span><span class="nv">when</span> <span class="p">(</span><span class="nv">fboundp</span> <span class="ss">&#39;tool-bar-mode</span><span class="p">)</span> <span class="p">(</span><span class="nv">tool-bar-mode</span> <span class="mi">-1</span><span class="p">))</span>
+<span class="c1">;;禁止显示滚动条</span>
+<span class="p">(</span><span class="nv">when</span> <span class="p">(</span><span class="nv">fboundp</span> <span class="ss">&#39;scroll-bar-mode</span><span class="p">)</span> <span class="p">(</span><span class="nv">scroll-bar-mode</span> <span class="mi">-1</span><span class="p">))</span>
+<span class="c1">;;禁止emacs一个劲的叫</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">visible-bell</span> <span class="no">t</span><span class="p">)</span><span class="c1">;</span>
+<span class="c1">;;在console，不想看到屏幕不停的闪</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">ring-bell-function</span> <span class="p">(</span><span class="nv">lambda</span> <span class="p">()</span> <span class="no">t</span><span class="p">))</span>
+<span class="c1">;;关闭启动是的那个“开机画面”</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">inhibit-startup-message</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;;设置剪切板最大条目数为200</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">kill-ring-max</span> <span class="mi">200</span><span class="p">)</span>
+<span class="c1">;;一行显示最多显示80列</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">default-fill-column</span> <span class="mi">80</span><span class="p">)</span>
+<span class="c1">;;缺省的major-mode为text-mode</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">default-major-mode</span> <span class="ss">&#39;text-mode</span><span class="p">)</span>
+<span class="c1">;;括号匹配时显示另外一边的括号</span>
+<span class="p">(</span><span class="nv">show-paren-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">show-paren-style</span> <span class="ss">&#39;parentheses</span><span class="p">)</span>
+<span class="c1">;;显示语法高亮</span>
+<span class="p">(</span><span class="nv">global-font-lock-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;;设置编码</span>
+<span class="p">(</span><span class="nv">set-buffer-file-coding-system</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-terminal-coding-system</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-keyboard-coding-system</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-selection-coding-system</span> <span class="ss">&#39;utf-16-le</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-default-coding-systems</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-clipboard-coding-system</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">set-language-environment</span> <span class="s">&#34;UTF-8&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">prefer-coding-system</span> <span class="ss">&#39;utf-8</span><span class="p">)</span>  
+<span class="p">(</span><span class="nv">set-file-name-coding-system</span> <span class="ss">&#39;gb18030</span><span class="p">)</span>
+<span class="c1">;;内部有个自动补全功能，根据当前buffer的内容、文件名、剪切板等自动补全</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">hippie-expand-try-functions-list</span>
+      <span class="o">&#39;</span><span class="p">(</span>
+        <span class="nv">try-expand-dabbrev</span>
+        <span class="nv">try-expand-dabbrev-visible</span>
+        <span class="nv">try-expand-dabbrev-all-buffers</span>
+        <span class="nv">try-expand-dabbrev-from-kill</span>
+        <span class="nv">try-complete-file-name-partially</span>
+        <span class="nv">try-complete-file-name</span>
+        <span class="nv">try-expand-all-abbrevs</span>
+        <span class="nv">try-expand-list</span>
+        <span class="nv">try-expand-line</span>
+        <span class="nv">try-complete-lisp-symbol-partially</span>
+        <span class="nv">try-complete-lisp-symbol</span><span class="p">))</span>
+<span class="c1">;;按ALT+/ 键进行补全</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;M-/&#34;</span><span class="p">)</span> <span class="ss">&#39;hippie-expand</span><span class="p">)</span>
+<span class="c1">;;用ibuffer替换默认的buffer管理器</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-x C-b&#34;</span><span class="p">)</span> <span class="ss">&#39;ibuffer</span><span class="p">)</span>
+<span class="c1">;;用正则搜索替换默认搜索</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-s&#34;</span><span class="p">)</span> <span class="ss">&#39;isearch-forward-regexp</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">&#34;C-r&#34;</span><span class="p">)</span> <span class="ss">&#39;isearch-backward-regexp</span><span class="p">)</span>
+<span class="c1">;;一个好用的minibuffer插件ido，许多插件都基于它。</span>
+<span class="p">(</span><span class="nv">ido-mode</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">ido-enable-flex-matching</span> <span class="no">t</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看出除了数字、nil和t之外所有的值都需要加<code>'</code>来传值，如果不加表示执行这个值，加了表示只需要返回它本身的字符。</p>
+
+<h2 id="内置的自定义方法">内置的自定义方法</h2>
+
+<p>显然虽然可以通过package说明来定义配置，但每个package包含了大量的自定义变量或者函数，使用<code>M-x customize</code>则会出现一个buffer列出了可自定义的类别，进入每个类别当中，又有各个package的名字，再随便选择一个package的名字就会展开这个package可定义的变量或者函数，每个条目都包含了此条目的说明以及现有默认的值。</p>
+
+<p><img src="../images/packages.png" alt="package" /></p>
+
+<p>比如<code>M-x customize</code>，进入 <strong>Faces</strong>这个用来配置emacs外观的配置组，再深入到<strong>Basic Faces</strong>，就可以看到一系列的变量和函数，接着选择 <strong>Cursor face</strong>(用来配置光标外观的)，在最左边按下enter键，就会展开一个<strong>Choose</strong>按钮，点击则会列出各种颜色，随便选一个，选完点最上面用<code>apply</code>或<code>apply and save</code>两个按钮，光标的颜色就变成了刚刚选取的颜色。
+其实打开<strong>init.el</strong>文件也可以看到文件末尾增加了两个函数，也就是说在emacs内置的自定义操作最后还是以文字的形式保存到了init.el里。增加的函数如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">custom-set-variables</span>
+ <span class="c1">;; custom-set-variables was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won&#39;t work right.</span>
+ <span class="p">)</span>
+<span class="p">(</span><span class="nv">custom-set-faces</span>
+ <span class="c1">;; custom-set-faces was added by Custom.</span>
+ <span class="c1">;; If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="c1">;; Your init file should contain only one such instance.</span>
+ <span class="c1">;; If there is more than one, they won&#39;t work right.</span>
+ <span class="o">&#39;</span><span class="p">(</span><span class="nv">cursor</span> <span class="p">((</span><span class="no">t</span> <span class="p">(</span><span class="ss">:background</span> <span class="s">&#34;DarkOliveGreen1&#34;</span><span class="p">))</span> <span class="p">(</span><span class="no">t</span> <span class="no">nil</span><span class="p">))))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="本文参考">本文参考</h2>
+
+<ol>
+<li><a href="http://tuhdo.github.io/emacs-tutor.html">emacs-tutor</a></li>
+<li><a href="http://emacser.com/dea.htm">我的emacs配置</a></li>
+</ol>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-02-01</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/emacs/">emacs</a>
+          
+          <a href="/tags/ide/">IDE</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">emacs完全补完计划（三）——package的引入和管理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/">
+            <span class="next-text nav-default">emacs完全补完计划（一）——嘴炮和入门</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

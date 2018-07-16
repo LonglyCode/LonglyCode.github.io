@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>emacs完全补完计划（三）——package的引入和管理 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content="package说明  emacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。
+ package存放在哪里？ 有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：
+12345678910111213 ;;内置的package管理，emacs24以上的版本有用 (require &amp;#39;package) ;;将melpa仓库地址加入到package-archives这个列表变量里面 (add-to-list &amp;#39;package-archives &amp;#39;(&amp;#34;melpa&amp;#34; . &amp;#34;http://melpa.org/packages/&amp;#34;) t) ;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得 (add-to-list &amp;#39;package-archives &amp;#39;(&amp;#34;popkit&amp;#34; . &amp;#34;http://elpa.popkit.org/packages/&amp;#34;) t) ;;初始化package (package-initialize) ;;更新仓库里面的package (when (not package-archive-contents) (package-refresh-contents))   
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="emacs完全补完计划（三）——package的引入和管理" />
+<meta property="og:description" content="
+
+package说明
+
+
+emacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。
+
+
+package存放在哪里？
+
+有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：
+
+
+ 1 2 3 4 5 6 7 8 910111213
+
+;;内置的package管理，emacs24以上的版本有用
+(require &#39;package)
+;;将melpa仓库地址加入到package-archives这个列表变量里面
+(add-to-list &#39;package-archives
+    &#39;(&#34;melpa&#34; . &#34;http://melpa.org/packages/&#34;) t)
+;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得
+(add-to-list &#39;package-archives 
+    &#39;(&#34;popkit&#34; . &#34;http://elpa.popkit.org/packages/&#34;) t)
+;;初始化package
+(package-initialize)
+;;更新仓库里面的package
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/" />
+
+
+
+<meta property="article:published_time" content="2016-02-02T23:30:39&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-02-02T23:30:39&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="emacs完全补完计划（三）——package的引入和管理">
+<meta itemprop="description" content="
+
+package说明
+
+
+emacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。
+
+
+package存放在哪里？
+
+有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：
+
+
+ 1 2 3 4 5 6 7 8 910111213
+
+;;内置的package管理，emacs24以上的版本有用
+(require &#39;package)
+;;将melpa仓库地址加入到package-archives这个列表变量里面
+(add-to-list &#39;package-archives
+    &#39;(&#34;melpa&#34; . &#34;http://melpa.org/packages/&#34;) t)
+;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得
+(add-to-list &#39;package-archives 
+    &#39;(&#34;popkit&#34; . &#34;http://elpa.popkit.org/packages/&#34;) t)
+;;初始化package
+(package-initialize)
+;;更新仓库里面的package
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-02-02T23:30:39&#43;00:00" />
+<meta itemprop="dateModified" content="2016-02-02T23:30:39&#43;00:00" />
+<meta itemprop="wordCount" content="3594">
+
+
+
+<meta itemprop="keywords" content="emacs,IDE," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="emacs完全补完计划（三）——package的引入和管理"/>
+<meta name="twitter:description" content="
+
+package说明
+
+
+emacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。
+
+
+package存放在哪里？
+
+有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：
+
+
+ 1 2 3 4 5 6 7 8 910111213
+
+;;内置的package管理，emacs24以上的版本有用
+(require &#39;package)
+;;将melpa仓库地址加入到package-archives这个列表变量里面
+(add-to-list &#39;package-archives
+    &#39;(&#34;melpa&#34; . &#34;http://melpa.org/packages/&#34;) t)
+;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得
+(add-to-list &#39;package-archives 
+    &#39;(&#34;popkit&#34; . &#34;http://elpa.popkit.org/packages/&#34;) t)
+;;初始化package
+(package-initialize)
+;;更新仓库里面的package
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">emacs完全补完计划（三）——package的引入和管理</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-02-02 </span>
+        
+        <span class="more-meta"> 3594 words </span>
+        <span class="more-meta"> 8 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#package说明">package说明</a>
+<ul>
+<li><a href="#package存放在哪里">package存放在哪里？</a></li>
+<li><a href="#如何下载和安装">如何下载和安装？</a></li>
+</ul></li>
+<li><a href="#package加载机制的前世今生">package加载机制的前世今生</a>
+<ul>
+<li><a href="#load-file">load-file</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#auto-loading">Auto-loading</a></li>
+<li><a href="#eval-after-load">Eval after load</a></li>
+<li><a href="#use-package">Use-package</a></li>
+<li><a href="#org-babel-load-file">org-babel-load-file</a></li>
+</ul></li>
+<li><a href="#小结">小结</a></li>
+<li><a href="#附录">附录</a></li>
+<li><a href="#本文参考">本文参考</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<h2 id="package说明">package说明</h2>
+
+<blockquote>
+<p>emacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。</p>
+</blockquote>
+
+<h3 id="package存放在哪里">package存放在哪里？</h3>
+
+<p>有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span><span class="lnt">13</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;内置的package管理，emacs24以上的版本有用</span>
+<span class="p">(</span><span class="nv">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="c1">;;将melpa仓库地址加入到package-archives这个列表变量里面</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;melpa&#34;</span> <span class="o">.</span> <span class="s">&#34;http://melpa.org/packages/&#34;</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span> 
+    <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;popkit&#34;</span> <span class="o">.</span> <span class="s">&#34;http://elpa.popkit.org/packages/&#34;</span><span class="p">)</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;;初始化package</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+<span class="c1">;;更新仓库里面的package</span>
+<span class="p">(</span><span class="nv">when</span> <span class="p">(</span><span class="nv">not</span> <span class="nv">package-archive-contents</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p></p>
+
+<h3 id="如何下载和安装">如何下载和安装？</h3>
+
+<p>在emacs里面运行<code>M-x package-list-packages</code>，就进入package的下载界面。按 <strong>n</strong> 表示next，按<strong>i</strong>表示标记需要安装的包，按<strong>u</strong>表示取消标记，按<strong>x</strong>表示执行刚刚已经标记的包。
+比如想安装emacs里面的VIM模拟器evil，可以先用<strong>C-s</strong>向下搜索evil，找到后按<strong>i</strong>再按<strong>x</strong>就下载到本地了。然后打开emacs的配置文件init.el，在里面添加下面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">require</span> <span class="ss">&#39;evil</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">evil-mode</span> <span class="no">t</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>重启emacs就算安装完成了。每个包都会说明如何在init.el里面添加配置，各有不同，可以到网上查找它的说明，不过一般都是<code>(xxx-mode)</code>或者<code>(xxx-mode t)</code>。
+可以看到init.el路径下面多出了一个<strong>elpa</strong>文件夹，里面存放着我们刚刚下载过的package。</p>
+
+<h2 id="package加载机制的前世今生">package加载机制的前世今生</h2>
+
+<blockquote>
+<p>在前面两节完全可以安装和配置package了，但是会遗留许多问题，第一就是不够灵活，如果这个package不在已有仓库上面或者我们自己编写了一个<code>*.el</code>文件如何加到emacs配置里面？如果有很多个<code>*.el</code>文件分布到各个文件夹里面如何管理？如果有几个包是相互引用的，如何确定它们的加载次序？每次启动emacs的时候都全部加载会严重拖慢启动速度，怎么解决？怎么将一个自己写的某个函数挂载在某个package上面？要解决这些，我们需要了解emacs中引入package的内部机理。spacemacs有一篇写的很不错的emacs加载机制的<a href="https://github.com/syl20bnr/spacemacs/blob/develop/doc/LAYERS.org">文章</a>，下面的内容相当于翻译加上自己的一些理解。</p>
+</blockquote>
+
+<h3 id="load-file">load-file</h3>
+
+<p>最简单粗暴的加载方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">load-file</span> <span class="s">&#34;~/elisp/foo.el&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这是最为原始的方式，填写的路径必须是绝对路径，这个路径也不会加入到emacs中load-path里（后面会提到）。它也不会优先寻找编译过<code>.elc</code>文件（显然编译过文件的会更快些）。这种方式已经被抛弃，仅作为历史提一下。</p>
+
+<h3 id="features">Features</h3>
+
+<p>Features(特性)是emacs默认的另外一种常见的加载方式。相当于在<code>xxx.el</code>文件里面先注册，后在init.el里面引入，需要双方互相约定的协议。比如我编写了一个名为<code>my-feature.el</code>的文件，提供某些功能想加入到emacs里面，先在这个文件最底下写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; Your code goes here ...</span>
+<span class="p">(</span><span class="nv">provide</span> <span class="ss">&#39;my-feature</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其中provide（提供）就是所谓注册，后面跟的参数一定要和当前文件名一样。
+然后再init.el文件里面加上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; Your code goes here ...</span>
+<span class="p">(</span><span class="nv">require</span> <span class="ss">&#39;my-feature</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>那么在启动emacs之后会从一个叫features的列表里检查my-feature这个feature有没有存在，没有会查找叫做my-feature.el或者my-feature.elc文件，加载它，如果没有找到会提示错误。实际上这个机制可以让各个package根据<code>require</code> 出现在<strong>init.el</strong>文件里的顺序来加载的，一定程度上解决了package之间的相互依赖的关系。
+在这里还有个问题，features机制提到会自动查找<code>.el</code>和<code>.elc</code>文件，那么它会在哪里查找，总不能搜寻硬盘里面的所有位置吧。所以需要一个列表来管理这些位置，名叫load-path，跟电脑里面的环境变量相似。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">push</span> <span class="s">&#34;/some/path&#34;</span> <span class="nv">load-path</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>相当把某个路径添加到load-path里面了。可以用来管理分布在多个不同路径下的<code>.el</code>和<code>.elc</code>文件。之前从elpa或者melpa下载安装package其实已经自动把下载的package路径加入到了<strong>load-path</strong>里面，所以可以直接使用<code>require</code>来配置包。</p>
+
+<h3 id="auto-loading">Auto-loading</h3>
+
+<p>使用require机制可能比粗暴load-file高明那么一丢丢，它解决了package加载顺序的问题，还有管理不同地方的elisp文件。但是它的加载方式也是比较暴力，每次emacs启动会全部一次性加载能查找到的所有文件，这将导致emacs的启动速度大大减慢。
+auto-loading就是为了解决这种情况而诞生。你可以向emacs中注册一个函数，只有当调用或者使用这个函数的时候，包含这个函数的文件才会加载。这么用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">autoload</span> <span class="ss">&#39;some-function</span> <span class="s">&#34;some-file&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当调用some-function 时，加载some-file.el，再执行这个函数。autoload完整参数：<code>(autoload FUNCTION FILE &amp;optional DOCSTRING INTERACTIVE TYPE)</code>，可以看出它除了提供加载文件地址外，还可以编写说明文档，在不加载文件时也能够查看它的用法。
+autoload这种方法可以写入的到emacs配置文件里面，但明显不好管理，为什么不在函数定义处就指明它是一个autoload形式的函数呢？事实上可以用所谓的&rdquo;魔术&rdquo;注释来装饰一个函数的开头，让它autoload。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;;###autoload</span>
+<span class="p">(</span><span class="nv">defun</span> <span class="nv">my-function</span> <span class="p">()</span>
+  <span class="c1">;; Source code...</span>
+  <span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>;;;###autoload</strong>是一种神奇的注释。当然autoload这种机制不局限于函数，可以用在一切可以定义的东西上面，比如宏、主模式、次模式等等。</p>
+
+<h3 id="eval-after-load">Eval after load</h3>
+
+<p>当我们加载一个package的时候想配置它，比如绑定一个自定义的函数等等。为了能够让我们的自定义的代码也autoload，使用with-eval-after-load。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">with-eval-after-load</span> <span class="ss">&#39;helm</span>
+     <span class="c1">;; Some-Code</span>
+     <span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当helm这个package加载后，some-code将接着执行，不管是使用features机制还是autoload机制。在emacs24.3方能使用with-eval-after-load，之前版本使用eval-after-load。</p>
+
+<h3 id="use-package">Use-package</h3>
+
+<p>Use-package是一个第三方的package，使用前需要安装。Use-package可以说是为了解决之前提到的<strong>所有</strong>问题而出现的。Use-package是一个宏，来看看它是怎么使用的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">use-package</span> <span class="nv">helm</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最简单的加载，等同于(require &lsquo;helm)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">use-package</span> <span class="nv">helm</span>
+    <span class="ss">:defer</span> <span class="no">t</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>:defer</code>是个关键字，如果为t，则表示helm的里面的凡是被autoload的函数、宏、模式等都成立。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">use-package</span> <span class="nv">helm</span>
+  <span class="ss">:defer</span> <span class="no">t</span>
+  <span class="ss">:init</span>
+  <span class="c1">;; Code to execute before Helm is loaded</span>
+  <span class="ss">:config</span>
+  <span class="c1">;; Code to execute after Helm is loaded</span>
+  <span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>增加了两个关键字:init和:config，顾名思义，针对package加载之前和package加载之后添加一些自己的配置。在:init中可以加载一些入口设定，比如定义一些按键调用这个package里面的函数。:config关键字后面的代码和with-eval-after-load功用是一样的，都是package实际被加载之后才会执行。
+use-package还有很多关键字，比如指定某些条件下才会加载package，可以指定某些特定文件才加载这个package，可以进<a href="https://github.com/jwiegley/use-package">官方文档</a>自行查看。</p>
+
+<h3 id="org-babel-load-file">org-babel-load-file</h3>
+
+<p>org是和markdown一样是一种格式标记文本形式，可以用来编写文档的，但它比markdown厉害得多，提供功能更齐全，其中一种功能是将org里面编写的程序放到org-babel（org文件的某个块区域）里面，和markdown仅仅用来展示程序不同，org-babel里面的程序可以用<code>org-babel-load-file</code>来执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">org-babel-load-file</span>  <span class="s">&#34;~/.emacs.d/config.org&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>意味着你可以在一个org文件里面写出emacs的配置和相应的说明，是一种高效管理emacs配置的方式，初次听说还蛮刷三观的。不过因为加载速度的原因没能完全流行起来，不过还是有一些emacser坚持使用这种方式。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>use-package渐渐一统以前古老的配置方式，许多知名的emacser用这个包将自己的配置又重新写了一遍。因为它既包含了现有的所有定义方式又提供了许多关键字，让配置一个package简单易行，而且可以将所有的包都变成了延时加载，只有使用的时候再加载，大大加速了emacs的启动速度。
+懂得以上所有的emacs加载机制后，基本上自己动手配置一个emacs配置不成问题。下篇文章会提到emacs能提供给我们的常用API。</p>
+
+<h2 id="附录">附录</h2>
+
+<p>几个对新手友好的包</p>
+
+<ol>
+<li><a href="https://github.com/technomancy/better-defaults">better-defaults</a>:正如其名，是更好的默认emacs小设置 。</li>
+<li><a href="https://github.com/justbur/emacs-which-key">which-key</a>:按键提醒，当你按一个按键的时候，会弹出之后所有可能的按键以及说明。</li>
+<li><a href="https://github.com/abo-abo/swiper">swiper</a>:增强搜索和minibuffer的交互，包括一些模糊搜索。</li>
+<li>evil-mode和evil-leader：vim党专用，emacs上的vim模拟器，功能十分完整，请自行搜索配置。</li>
+</ol>
+
+<h2 id="本文参考">本文参考</h2>
+
+<ol>
+<li><a href="https://github.com/syl20bnr/spacemacs/blob/develop/doc/LAYERS.org">Spacemacs-layers</a></li>
+<li><a href="https://github.com/jwiegley/use-package">use-package</a></li>
+</ol>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-02-02</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/emacs/">emacs</a>
+          
+          <a href="/tags/ide/">IDE</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">emacs完全补完计划(四)--API大考古</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/">
+            <span class="next-text nav-default">emacs完全补完计划（二）——简单配置和设置</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

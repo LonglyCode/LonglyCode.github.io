@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgresql on 记忆和记忆的补完</title>
+    <link>http://LonglyCode.github.io/tags/postgresql/</link>
+    <description>Recent content in Postgresql on 记忆和记忆的补完</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>LonglyCode</copyright>
+    <lastBuildDate>Tue, 19 Apr 2016 00:50:21 +0000</lastBuildDate>
+    
+	<atom:link href="http://LonglyCode.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初识postgresql以及在Flask里面的关联使用</title>
+      <link>http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 19 Apr 2016 00:50:21 +0000</pubDate>
+      
+      <guid>http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;!-- toc --&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python基础零碎笔记 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content=" 这些是很久之前学python的时候零零散散记录了的一些笔记，现在看来很简单，整理了一下用于开篇的博文吧。python 是优雅的语言，但有些技巧和语法需要注意一下。
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="python基础零碎笔记" />
+<meta property="og:description" content="
+
+
+这些是很久之前学python的时候零零散散记录了的一些笔记，现在看来很简单，整理了一下用于开篇的博文吧。python 是优雅的语言，但有些技巧和语法需要注意一下。
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" />
+
+
+
+<meta property="article:published_time" content="2016-01-20T11:54:22&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-01-20T11:54:22&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="python基础零碎笔记">
+<meta itemprop="description" content="
+
+
+这些是很久之前学python的时候零零散散记录了的一些笔记，现在看来很简单，整理了一下用于开篇的博文吧。python 是优雅的语言，但有些技巧和语法需要注意一下。
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-01-20T11:54:22&#43;00:00" />
+<meta itemprop="dateModified" content="2016-01-20T11:54:22&#43;00:00" />
+<meta itemprop="wordCount" content="1635">
+
+
+
+<meta itemprop="keywords" content="python,note," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="python基础零碎笔记"/>
+<meta name="twitter:description" content="
+
+
+这些是很久之前学python的时候零零散散记录了的一些笔记，现在看来很简单，整理了一下用于开篇的博文吧。python 是优雅的语言，但有些技巧和语法需要注意一下。
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">python基础零碎笔记</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-01-20 </span>
+        
+        <span class="more-meta"> 1635 words </span>
+        <span class="more-meta"> 4 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-循环技巧">1. 循环技巧：</a></li>
+<li><a href="#2-作用域">2. 作用域：</a></li>
+<li><a href="#3-slots-方法">3. slots 方法</a></li>
+<li><a href="#4-getatrribute-和-getattr-区别">4. <code>__getatrribute__</code> 和 <code>__getattr__</code>区别</a></li>
+<li><a href="#5-字符串">5. 字符串</a>
+<ul>
+<li><a href="#字符串的连接">字符串的连接</a></li>
+<li><a href="#字符串的反转">字符串的反转</a></li>
+</ul></li>
+<li><a href="#6-各种判断和比较">6. 各种判断和比较</a></li>
+<li><a href="#7-头文字">7. 头文字</a></li>
+<li><a href="#8-字典">8. 字典</a>
+<ul>
+<li><a href="#字典的创建可以有以下这几种方式">字典的创建可以有以下这几种方式</a></li>
+<li><a href="#字典取值">字典取值</a></li>
+<li><a href="#字典比较差异">字典比较差异</a></li>
+</ul></li>
+<li><a href="#9-sorted方法和使用">9. sorted方法和使用</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<blockquote>
+<p>这些是很久之前学python的时候零零散散记录了的一些笔记，现在看来很简单，整理了一下用于开篇的博文吧。python 是优雅的语言，但有些技巧和语法需要注意一下。</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="1-循环技巧">1. 循环技巧：</h2>
+
+<ul>
+<li>在字典中循环时，关键字和对应的值可以用 <strong>items()</strong> 方法解读出来</li>
+<li>在序列中循环时，索引位置和对应值可以使用 <strong>enumerate()</strong> 函数同时得到</li>
+<li>同时循环两个或更多的序列，可以使用 <strong>zip()</strong> 整体解读</li>
+</ul>
+
+<h2 id="2-作用域">2. 作用域：</h2>
+
+<ul>
+<li>Python 的一个特别之处在于其赋值操作总是在最里层的作用域。赋值不会复制数据——只是将命名绑定到对象。删除也是如此：“del x ”只是从局部作用域的命名空间中删除命名 x</li>
+</ul>
+
+<h2 id="3-slots-方法">3. slots 方法</h2>
+
+<ul>
+<li>slots方法其实广为人知，听说有人用这个方法节省了很多内存。slots的作用是阻止在实例化类时为实例分配dict，默认情况下每个类都会有一个dict,通过<code>__dict__</code>访问，这个dict维护了这个实例的所有属性。当你在一个class中定义了<code>__slots__</code>后所有class的实例中只有slots中定义的attributes会出现在class的实例中。当你实例化多个对象时可以节省内存，当然副作用就是你的实例对象不能动态添加class里slots定义之外的属性。
+<br /></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span><span class="lnt">8</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="vm">__slots__</span> <span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;name&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;age&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;dog&#34;</span><span class="p">,</span><span class="mi">22</span><span class="p">)</span>
+<span class="nb">hasattr</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;__dict__&#34;</span><span class="p">)</span> <span class="c1">#return false</span>
+<span class="n">u</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="mf">1.75</span> <span class="c1">#给不存在在slots里面的属性赋值会报错</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="4-getatrribute-和-getattr-区别">4. <code>__getatrribute__</code> 和 <code>__getattr__</code>区别</h2>
+
+<ul>
+<li><code>__getatrribute__</code>用来查询任意属性，包括存在和不存在的，<code>__getattr__</code>只有查询不存在的属性的时候才会触发，重写这个方法可以用于属性访问异常处理。</li>
+</ul>
+
+<h2 id="5-字符串">5. 字符串</h2>
+
+<h3 id="字符串的连接">字符串的连接</h3>
+
+<ul>
+<li>这个几乎上应该是入门者必须了解的特性了:因为字符串在内存里面<strong>不可变</strong>，所以如果用+号连接两个字符串时，将会进行各种内存调度工作，所以连接多个字符串先将其放进序列里面，然后用&rdquo;&ldquo;.join(seq)的方法，其中 seq 代表字符串序列。
+<br /></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">temp_str</span> <span class="o">=</span><span class="sa"></span><span class="s2">&#34;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;wo&#34;</span> <span class="sa"></span><span class="s2">&#34;he&#34;</span> <span class="sa"></span><span class="s2">&#34;ni&#34;</span><span class="p">))</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">temp_str</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="sa"></span><span class="s1">&#39;woheni&#39;</span>
+<span class="c1">#实际上join()方法是把前面的字符当做连接符来连接序列里面的字符串</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">temp_str</span> <span class="o">=</span><span class="sa"></span><span class="s2">&#34;;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;wo&#34;</span> <span class="sa"></span><span class="s2">&#34;he&#34;</span> <span class="sa"></span><span class="s2">&#34;ni&#34;</span><span class="p">))</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">temp_str</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="sa"></span><span class="s1">&#39;w;o;h;e;n;i&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="字符串的反转">字符串的反转</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; 是一个技巧性的方法
+&gt; a为字符串，a[::-2]用切片可以达到reverse的效果</pre></td></tr></table>
+</div>
+</div>
+<h2 id="6-各种判断和比较">6. 各种判断和比较</h2>
+
+<ul>
+<li>永远不要用==或者!=来比较单件, 比如 None. 使用 is 或者 is not</li>
+<li>一行判断：return_value = True if a == 1 else False 和 c 里面的 a?b:c 一样</li>
+<li>all([a, b, c])和a and b and c 效果是一样的</li>
+</ul>
+
+<h2 id="7-头文字">7. 头文字</h2>
+
+<ul>
+<li>通常认为用 #!/usr/bin/env python 要比 #!/usr/bin/python 更好，因为 python 解释器有时并不安装在默认路径，例如在 virtualenv 中，如果你用 python xxoo.py 来运行，那么写不写都没关系，如果要用 ./xxoo.py 那么就必须加这行，这行被称为 shebang, 用来为脚本语言指定解释器。</li>
+</ul>
+
+<h2 id="8-字典">8. 字典</h2>
+
+<h3 id="字典的创建可以有以下这几种方式">字典的创建可以有以下这几种方式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;a&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;b&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">([(</span><span class="sa"></span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="sa"></span><span class="s2">&#34;b&#34;</span><span class="p">,</span><span class="mi">2</span><span class="p">)])</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">names</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="c1">#用zip()来解析两个表达式，当然也可以用列表推导式来代替</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="字典取值">字典取值</h3>
+
+<ul>
+<li>判断一个 key 是否在一个 dict 里面，用 has_key(key,default=none),其中第二参数可以自己定义当为空时的返回值</li>
+</ul>
+
+<h3 id="字典比较差异">字典比较差异</h3>
+
+<ul>
+<li>用视图来判断两个字典的差异，即viewitems,具体用法如下:
+在 Python 2.x 里面，iteritems() 和 viewitems() 这两个方法都已经废除了，而 item() 得到的结果是和 2.x 里面 viewitems() 一致的。以下代码在python3.4中测试。
+<code>python
+n[18]: d = dict(a=1,b=2,c=4)
+In[19]: d2 = dict(a=1,b=2,c=3)
+In[20]: d.items()
+Out[20]: dict_items([('b', 2), ('c', 4), ('a', 1)])
+In[21]: v1 = d.items()
+In[22]: v2 = d2.items()
+In[23]: v1 | v2 #求并集
+Out[23]: {('a', 1), ('b', 2), ('c', 3), ('c', 4)}
+In[24]: v1 &amp; v2 #求交集
+Out[24]: {('a', 1), ('b', 2)}
+#有意思的一点是视图会随着原来的字典的变化而变化
+In[25]: d.update(e=8)
+In[26]: d
+Out[26]: {'a': 1, 'b': 2, 'c': 4, 'e': 8}
+In[27]: v1
+Out[27]: dict_items([('e', 8), ('b', 2), ('c', 4), ('a', 1)])
+</code></li>
+</ul>
+
+<h2 id="9-sorted方法和使用">9. sorted方法和使用</h2>
+
+<blockquote>
+<ol>
+<li>sorted(a, key=lambda result: result[0],reverse=True) ，这个排序居然跟 lisp 里面很像，基本抄过来的。在 key 里面定义一个匿名函数，在函数里面自定排序规则，因为输入参数默认为 a（sorted 的第一个参数），所以使用匿名函数时可以使用 map 等提取单独元素，完整方法以及参数 sorted(data, cmp=None, key=None, reverse=False)</li>
+<li>operator.itemgetter函数获取的不是值，而是定义了一个函数，通过该函数作用到对象上才能获取值。所以sorted(aa.items(),key=itemgetter(1)) 是对字典 aa 的value值进行排序，使用之前 from operator import itemgetter</li>
+</ol>
+</blockquote>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-01-20</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/python/">python</a>
+          
+          <a href="/tags/note/">note</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/python%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">python进阶知识总览</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

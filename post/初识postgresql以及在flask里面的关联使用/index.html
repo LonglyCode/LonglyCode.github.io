@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>初识postgresql以及在Flask里面的关联使用 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="longlycode" />
+  <meta name="description" content=" 起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="初识postgresql以及在Flask里面的关联使用" />
+<meta property="og:description" content="
+
+
+起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/" />
+
+
+
+<meta property="article:published_time" content="2016-04-19T00:50:21&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-04-19T00:50:21&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="初识postgresql以及在Flask里面的关联使用">
+<meta itemprop="description" content="
+
+
+起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-04-19T00:50:21&#43;00:00" />
+<meta itemprop="dateModified" content="2016-04-19T00:50:21&#43;00:00" />
+<meta itemprop="wordCount" content="2216">
+
+
+
+<meta itemprop="keywords" content="postgresql,Flask,python,db," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="初识postgresql以及在Flask里面的关联使用"/>
+<meta name="twitter:description" content="
+
+
+起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">初识postgresql以及在Flask里面的关联使用</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-04-19 </span>
+        
+        <span class="more-meta"> 2216 words </span>
+        <span class="more-meta"> 5 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-安装">1.安装</a></li>
+<li><a href="#2-初始化-添加用户和数据库">2. 初始化&ndash;添加用户和数据库</a></li>
+<li><a href="#3-登陆和使用">3. 登陆和使用</a></li>
+<li><a href="#4-登陆之后">4. 登陆之后</a>
+<ul>
+<li><a href="#基本操作">基本操作</a></li>
+<li><a href="#sql操作">sql操作</a></li>
+</ul></li>
+<li><a href="#5-启动-备份和恢复">5. 启动、备份和恢复</a>
+<ul>
+<li><a href="#启动中止状态操作">启动中止状态操作</a></li>
+<li><a href="#备份和恢复">备份和恢复</a></li>
+</ul></li>
+<li><a href="#6-连接flask的依赖">6. 连接Flask的依赖</a></li>
+<li><a href="#7-最小使用">7. 最小使用</a></li>
+<li><a href="#8-添加数据和显示">8. 添加数据和显示</a></li>
+<li><a href="#9-从postgresql里面备份">9. 从postgresql里面备份</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<blockquote>
+<p>起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="1-安装">1.安装</h2>
+
+<ol>
+<li><p>在Ubuntu系统以及其延伸系统安装特别方便。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">postgresql</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">client</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">pgadmin3</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>分别为本体、客户端和一个管理postgresql的图形界面软件，非常好用，建议不熟悉命令行的新手使用。</p></li>
+
+<li><p>在window下直接下载exe文件安装。
+安装完成后将postgresql的<strong>bin</strong>目录加入到系统环境变量<code>Path</code>,譬如<code>;C:\Program Files (x86)\postgres\9.3\bin</code>加入到计算机-&gt;属性-&gt;高级环境变量-&gt;环境变量-&gt;系统变量-&gt;Path最末端。之后也可以在cmd下面操作。</p></li>
+</ol>
+
+<h2 id="2-初始化-添加用户和数据库">2. 初始化&ndash;添加用户和数据库</h2>
+
+<p>初始化的时候让人很疑惑，postgresql的用户和系统用户不关联，它本身自己拥有一套用户管理系统，必须新建一个用户和一个和用户名同名的数据才能使用（有疑问?）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span></pre></td>
+<td class="lntd">
+<pre class="chroma">``` sql
+# 所有的命令都可以加 --help来查看用法，下面用-s参数新建一个superuser账号 hehe。
+createuser -s hehe
+# 新建一个同名的数据库hehe并用参数-O指定owner（所有者）。
+createdb -O hehe hehe    # createdb -O username databasename
+```</pre></td></tr></table>
+</div>
+</div>
+<p>值得一提的是，它自带一个postgres用户和postgres数据库。</p>
+
+<h2 id="3-登陆和使用">3. 登陆和使用</h2>
+
+<p><code>psql</code> 是连接postgresql的命令控制台工具。常用的几个参数选项和MySQL很相似。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></pre></td>
+<td class="lntd">
+<pre class="chroma">``` sql
+# 用上节新建的账号登陆
+psql -h 127.0.0.1 -p 5442 -U hehe -d hehe
+```</pre></td></tr></table>
+</div>
+</div>
+<p>最常用的几个参数<code>-h</code>指定服务器，<code>-p</code>指定端口，缺省默认的为5432，<code>-U</code> 指定登陆的用户，<code>-d</code>指定数据库，缺省默认和用户名相同的数据库。如果此用户需要密码接下来还需要输入口令。</p>
+
+<h2 id="4-登陆之后">4. 登陆之后</h2>
+
+<blockquote>
+<p>登陆之后就进入命令控制台，几乎所有操作都是在这个环境下进行的。</p>
+</blockquote>
+
+<h3 id="基本操作">基本操作</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span></pre></td>
+<td class="lntd">
+<pre class="chroma">1. \h:查看sql命令的解释
+2. \?:所有psql命令列表
+3. \l:现有所有数据库列表
+4. \c [databasename]:直接跳转连接到其他数据库
+5. \d:列出当前数据库的表格
+6. \d [tablename]:列出表格的结构，非常有用的命令
+7. \du:列出所有用户
+8. \conninfo:当前连接信息
+9. \password:为当前用户指定一个登陆口令
+10. \q:退出当前控制台</pre></td></tr></table>
+</div>
+</div>
+<h3 id="sql操作">sql操作</h3>
+
+<ul>
+<li><p>sql命令很多而且所有数据库大多都雷同。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">#</span> <span class="err">新建表</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">books</span><span class="p">(</span><span class="n">book_no</span> <span class="nb">integer</span><span class="p">,</span><span class="n">name</span> <span class="nb">text</span><span class="p">,</span><span class="n">price</span> <span class="n">numberic</span><span class="p">,</span><span class="k">UNIQUE</span> <span class="p">(</span><span class="n">book_no</span><span class="p">));</span>
+<span class="o">#</span> <span class="err">插入数据</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">books</span><span class="p">(</span><span class="n">book_no</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">2333</span><span class="p">,</span><span class="s1">&#39;万历十五年&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">.</span><span class="mi">5</span><span class="p">);</span>
+<span class="o">#</span> <span class="err">查询</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">books</span>
+<span class="o">#</span> <span class="err">等等</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<h2 id="5-启动-备份和恢复">5. 启动、备份和恢复</h2>
+
+<h3 id="启动中止状态操作">启动中止状态操作</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span></pre></td>
+<td class="lntd">
+<pre class="chroma">1. Ubuntu: /etc/init.d/postgresql start (stop/status/restart)
+2. Windows: /PostgreSQL/9.3/bin/pg_ctl.exe (stop/status/restart/reload)</pre></td></tr></table>
+</div>
+</div>
+<h3 id="备份和恢复">备份和恢复</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></pre></td>
+<td class="lntd">
+<pre class="chroma">1. pg_dump [databasename]:将postgresql数据导出到一个脚本文件
+2. pg_dumpall:将所有的postgresql数据库导出到一个脚本文件
+3. pg_restore:从以上两个命令导出脚本文件恢复
+4. psql [databasename] &lt; backup.sql恢复外部数据</pre></td></tr></table>
+</div>
+</div>
+<h2 id="6-连接flask的依赖">6. 连接Flask的依赖</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span></pre></td>
+<td class="lntd">
+<pre class="chroma">1. Psycopg2: 一个适配连接postgres数据库的python包，windows下请选择 win-Psycopg不然会提示缺少DLL的error
+2. Flask-SQLAlchemy(2.1):Flask下的SQLAlchemy拓展，以更加python的形式来写数据库结构，更容易迁移数据库
+3. Flask-Migrate:Flask数据库的初始化、迁移脚本和版本管理的利器
+4. Flask-Script:命令行的拓展
+几乎使用Flask的用户都默认安装后三者，真正依赖是Psycopg2。</pre></td></tr></table>
+</div>
+</div>
+<h2 id="7-最小使用">7. 最小使用</h2>
+
+<ol>
+<li><p>在Flask项目的config.py文件里面最主要设置<code>SQLALCHEMY_DATABASE_URI</code>变量就可以了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask.ext.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">)</span> <span class="ow">or</span> \
+<span class="sa"></span><span class="s1">&#39;postgresql://username:password@localhost:5432/databasename</span><span class="err">
+</span><span class="err"></span><span class="s1">DEBUG =True</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="s1">app=Flask(__name__)</span><span class="err">
+</span><span class="err"></span><span class="s1">app.config.from_object(__name__)</span><span class="err">
+</span><span class="err"></span><span class="s1">db=SQLAlchemy(app)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>比如用之前建好的数据库<code>hehe</code>就把最后那行改成 <code>postgresql://hehe:@localhost:5432/hehe</code></p></li>
+
+<li><p>用SQLAlchemy来建一个名为User的测试model,保存为model.py文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span><span class="lnt">13</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;users&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">password_hash</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa"></span><span class="s1">&#39;&lt;User </span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>建立一个名为manage.py文件，最小化使用Flask框架。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span><span class="lnt">13</span><span class="lnt">14</span><span class="lnt">15</span><span class="lnt">16</span><span class="lnt">17</span><span class="lnt">18</span><span class="lnt">19</span><span class="lnt">20</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">app</span><span class="p">,</span><span class="n">db</span>
+<span class="kn">from</span> <span class="nn">flask.ext.script</span> <span class="kn">import</span> <span class="n">Manager</span>
+<span class="kn">from</span> <span class="nn">flask.ext.migrate</span> <span class="kn">import</span> <span class="n">Migrate</span><span class="p">,</span><span class="n">MigrateCommand</span>
+<span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="n">migrate</span><span class="o">=</span><span class="n">Migrate</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+<span class="n">manager</span><span class="o">=</span><span class="n">Manager</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="n">manager</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;db&#39;</span><span class="p">,</span><span class="n">MigrateCommand</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="sa"></span><span class="s1">&#39;Hello&#39;</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;/&lt;name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_user</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;hello {} !&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">manager</span><span class="o">.</span><span class="n">run</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>命令行下初始化数据库，先来到项目目录下，按顺序输入下面三个命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 初始化</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">db</span> <span class="n">init</span>
+<span class="c1"># 建立迁移脚本</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">db</span> <span class="n">migrate</span> <span class="o">-</span><span class="n">m</span> <span class="sa"></span><span class="s2">&#34;init databasename for postgres&#34;</span>
+<span class="c1"># 更新</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">db</span> <span class="n">upgrade</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看见当前目录下面生成了一个名为<code>migrations</code>文件夹，这个文件夹是保存迁移脚本和数据库版本控制的地方，下次如果添加了新的model只要使用上面最后两条命令即可。</p></li>
+
+<li><p>在psql下查看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span><span class="lnt">12</span><span class="lnt">13</span><span class="lnt">14</span><span class="lnt">15</span><span class="lnt">16</span><span class="lnt">17</span><span class="lnt">18</span><span class="lnt">19</span><span class="lnt">20</span><span class="lnt">21</span><span class="lnt">22</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">hehe</span>
+<span class="o">#</span> <span class="err">查看当前数据库的表</span>
+<span class="n">hehe</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span>
+<span class="k">Schema</span>   <span class="o">|</span>      <span class="n">Name</span>       <span class="o">|</span>  <span class="k">Type</span> <span class="o">|</span> <span class="k">Owner</span>
+<span class="c1">---------|-----------------|-------|--------
+</span><span class="c1"></span><span class="k">public</span>   <span class="o">|</span> <span class="n">alembic_version</span> <span class="o">|</span> <span class="k">table</span> <span class="o">|</span> <span class="n">hehe</span>
+<span class="k">public</span>   <span class="o">|</span> <span class="n">users</span>           <span class="o">|</span> <span class="k">table</span> <span class="o">|</span> <span class="n">hehe</span>
+<span class="k">public</span>   <span class="o">|</span> <span class="n">users_id_seq</span>    <span class="o">|</span> <span class="o">??????|</span> <span class="n">hehe</span>
+<span class="o">#</span> <span class="err">查看</span><span class="n">users表结构</span>
+<span class="n">hehe</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">users</span>
+                                    <span class="k">Table</span> <span class="s2">&#34;public.users&#34;</span>
+    <span class="k">Column</span>    <span class="o">|</span>         <span class="k">Type</span>           <span class="o">|</span>                 <span class="n">Modifiers</span>
+<span class="c1">--------------|------------------------|---------------------------------------------
+</span><span class="c1"></span><span class="n">id</span>            <span class="o">|</span> <span class="nb">integer</span>                <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="n">nextval</span><span class="p">(</span><span class="s1">&#39;users_id_seq&#39;</span><span class="p">::</span><span class="n">regclass</span><span class="p">)</span>
+<span class="n">email</span>         <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>  <span class="o">|</span>
+<span class="n">username</span>      <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>  <span class="o">|</span>
+<span class="n">password_hash</span> <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="o">|</span>
+<span class="n">name</span>          <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>  <span class="o">|</span>
+<span class="n">Indexes</span><span class="p">:</span>
+    <span class="s2">&#34;users_pkey&#34;</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">btree</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+    <span class="s2">&#34;ix_users_email&#34;</span> <span class="k">UNIQUE</span><span class="p">,</span> <span class="n">btree</span> <span class="p">(</span><span class="n">email</span><span class="p">)</span>
+    <span class="s2">&#34;ix_users_username&#34;</span> <span class="k">UNIQUE</span><span class="p">,</span> <span class="n">btree</span> <span class="p">(</span><span class="n">username</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>说明成功了</p></li>
+</ol>
+
+<h2 id="8-添加数据和显示">8. 添加数据和显示</h2>
+
+<p>还是用命令行操作，需要在manage.py文件下面添加:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask.ext.script</span> <span class="kn">import</span> <span class="n">Shell</span>
+<span class="k">def</span> <span class="nf">make_shell_context</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span><span class="n">User</span><span class="o">=</span><span class="n">User</span><span class="p">)</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;shell&#39;</span><span class="p">,</span><span class="n">Shell</span><span class="p">(</span><span class="n">make_context</span><span class="o">=</span><span class="n">make_shell_context</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>然后再命令行下面<code>python manage.py shell</code>进入带有app、db和User上下文环境的shell控制台。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">u</span> <span class="o">=</span> <span class="k">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&#34;xibao&#34;</span><span class="p">)</span>
+<span class="o">#</span> <span class="err">添加一个名为</span><span class="n">xibao的用户</span>
+<span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">db</span><span class="p">.</span><span class="k">session</span><span class="p">.</span><span class="k">commit</span><span class="p">()</span>
+<span class="o">#</span> <span class="err">退出当前控制台</span>
+<span class="n">exit</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>启动服务<code>python manage runserver</code>，在浏览器上面输入<code>127.0.0.1:5000\xibao</code>会返回&rdquo;hello xibao !&ldquo;。</p>
+
+<h2 id="9-从postgresql里面备份">9. 从postgresql里面备份</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">#</span> <span class="err">使用之前</span><span class="n">pg_dump命令备份</span>
+<span class="n">pg_dump</span>  <span class="o">-</span><span class="n">f</span> <span class="n">backup</span><span class="p">.</span><span class="k">sql</span> <span class="n">hehe</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当前项目目录下面会多出一个<code>backup.sql</code>文件。</p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">longlycode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-04-19</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/postgresql/">postgresql</a>
+          
+          <a href="/tags/flask/">Flask</a>
+          
+          <a href="/tags/python/">python</a>
+          
+          <a href="/tags/db/">db</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/">
+            <span class="next-text nav-default">emacs完全补完计划（五）——歌剧魅影Elisp</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

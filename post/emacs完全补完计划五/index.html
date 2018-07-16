@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>emacs完全补完计划（五）——歌剧魅影Elisp - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content="闲话elisp  如果说emacs是一出庞大的歌剧，那么elisp则是撑起全场的主角，它犹如一道魅影，神秘、黑暗、引人入胜，在剧初以无以伦比的优雅身姿和独一无二的音色试图唤起观众的灵魂共鸣；当有人尝试接近它的时候，或许期望越大失望越大，藏在另一半面具下是人性特有的丑陋，是受世人侮辱唾弃后难掩的愤怒和敏感；而最后它高尚的选择和坚持让作为学习者的我们不断反思，什么叫做美？不是世俗的外在的可视的，是来源内在的人性之光，能够让灵魂起舞。事实上扯远了，不过大概总结了学习elisp的三个阶段，首先被洗脑认为lisp系语言如同武林传说中的秘籍邪典，迷迷糊糊建立了莫名的崇拜，后来深入学习才发现lisp系语言有固有的缺陷，致使它们在现代背景下难有立足之地，最后在完全了解它们了，发现在语言演变的历史长河它们是那么的独一无二，具有难以言表在时间的美，仿佛洞开了一个新世界。lisp相对现在很古老，在这期间有很多篇文章试图向别人灌输它的思想，这篇文章也是其中一篇，但lisp系语言太庞大，就elisp本身的官方手册都有一千多页，要在一篇文章里面完全展现它是不现实的，只能按笔者自己的有限理解来书写，可能夹杂着不恰当的比喻，希望观者有所悟。
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="emacs完全补完计划（五）——歌剧魅影Elisp" />
+<meta property="og:description" content="
+
+闲话elisp
+
+
+如果说emacs是一出庞大的歌剧，那么elisp则是撑起全场的主角，它犹如一道魅影，神秘、黑暗、引人入胜，在剧初以无以伦比的优雅身姿和独一无二的音色试图唤起观众的灵魂共鸣；当有人尝试接近它的时候，或许期望越大失望越大，藏在另一半面具下是人性特有的丑陋，是受世人侮辱唾弃后难掩的愤怒和敏感；而最后它高尚的选择和坚持让作为学习者的我们不断反思，什么叫做美？不是世俗的外在的可视的，是来源内在的人性之光，能够让灵魂起舞。事实上扯远了，不过大概总结了学习elisp的三个阶段，首先被洗脑认为lisp系语言如同武林传说中的秘籍邪典，迷迷糊糊建立了莫名的崇拜，后来深入学习才发现lisp系语言有固有的缺陷，致使它们在现代背景下难有立足之地，最后在完全了解它们了，发现在语言演变的历史长河它们是那么的独一无二，具有难以言表在时间的美，仿佛洞开了一个新世界。lisp相对现在很古老，在这期间有很多篇文章试图向别人灌输它的思想，这篇文章也是其中一篇，但lisp系语言太庞大，就elisp本身的官方手册都有一千多页，要在一篇文章里面完全展现它是不现实的，只能按笔者自己的有限理解来书写，可能夹杂着不恰当的比喻，希望观者有所悟。
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/" />
+
+
+
+<meta property="article:published_time" content="2016-02-28T20:18:06&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-02-28T20:18:06&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="emacs完全补完计划（五）——歌剧魅影Elisp">
+<meta itemprop="description" content="
+
+闲话elisp
+
+
+如果说emacs是一出庞大的歌剧，那么elisp则是撑起全场的主角，它犹如一道魅影，神秘、黑暗、引人入胜，在剧初以无以伦比的优雅身姿和独一无二的音色试图唤起观众的灵魂共鸣；当有人尝试接近它的时候，或许期望越大失望越大，藏在另一半面具下是人性特有的丑陋，是受世人侮辱唾弃后难掩的愤怒和敏感；而最后它高尚的选择和坚持让作为学习者的我们不断反思，什么叫做美？不是世俗的外在的可视的，是来源内在的人性之光，能够让灵魂起舞。事实上扯远了，不过大概总结了学习elisp的三个阶段，首先被洗脑认为lisp系语言如同武林传说中的秘籍邪典，迷迷糊糊建立了莫名的崇拜，后来深入学习才发现lisp系语言有固有的缺陷，致使它们在现代背景下难有立足之地，最后在完全了解它们了，发现在语言演变的历史长河它们是那么的独一无二，具有难以言表在时间的美，仿佛洞开了一个新世界。lisp相对现在很古老，在这期间有很多篇文章试图向别人灌输它的思想，这篇文章也是其中一篇，但lisp系语言太庞大，就elisp本身的官方手册都有一千多页，要在一篇文章里面完全展现它是不现实的，只能按笔者自己的有限理解来书写，可能夹杂着不恰当的比喻，希望观者有所悟。
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-02-28T20:18:06&#43;00:00" />
+<meta itemprop="dateModified" content="2016-02-28T20:18:06&#43;00:00" />
+<meta itemprop="wordCount" content="7167">
+
+
+
+<meta itemprop="keywords" content="emacs,tutorial," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="emacs完全补完计划（五）——歌剧魅影Elisp"/>
+<meta name="twitter:description" content="
+
+闲话elisp
+
+
+如果说emacs是一出庞大的歌剧，那么elisp则是撑起全场的主角，它犹如一道魅影，神秘、黑暗、引人入胜，在剧初以无以伦比的优雅身姿和独一无二的音色试图唤起观众的灵魂共鸣；当有人尝试接近它的时候，或许期望越大失望越大，藏在另一半面具下是人性特有的丑陋，是受世人侮辱唾弃后难掩的愤怒和敏感；而最后它高尚的选择和坚持让作为学习者的我们不断反思，什么叫做美？不是世俗的外在的可视的，是来源内在的人性之光，能够让灵魂起舞。事实上扯远了，不过大概总结了学习elisp的三个阶段，首先被洗脑认为lisp系语言如同武林传说中的秘籍邪典，迷迷糊糊建立了莫名的崇拜，后来深入学习才发现lisp系语言有固有的缺陷，致使它们在现代背景下难有立足之地，最后在完全了解它们了，发现在语言演变的历史长河它们是那么的独一无二，具有难以言表在时间的美，仿佛洞开了一个新世界。lisp相对现在很古老，在这期间有很多篇文章试图向别人灌输它的思想，这篇文章也是其中一篇，但lisp系语言太庞大，就elisp本身的官方手册都有一千多页，要在一篇文章里面完全展现它是不现实的，只能按笔者自己的有限理解来书写，可能夹杂着不恰当的比喻，希望观者有所悟。
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">emacs完全补完计划（五）——歌剧魅影Elisp</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-02-28 </span>
+        
+        <span class="more-meta"> 7167 words </span>
+        <span class="more-meta"> 15 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#闲话elisp">闲话elisp</a></li>
+<li><a href="#七言七日七符">七言七日七符</a>
+<ul>
+<li><a href="#atom">atom</a></li>
+<li><a href="#cons-car-cdr">cons、car、cdr</a></li>
+<li><a href="#quote">quote</a></li>
+<li><a href="#eq">eq</a></li>
+<li><a href="#cond">cond</a></li>
+</ul></li>
+<li><a href="#elisp的基本数据类型">elisp的基本数据类型</a>
+<ul>
+<li><a href="#integer">integer</a></li>
+<li><a href="#float">float</a></li>
+<li><a href="#char">Char</a></li>
+</ul></li>
+<li><a href="#elisp的容器类型">elisp的容器类型</a>
+<ul>
+<li><a href="#list">List</a>
+<ul>
+<li><a href="#alist-association-list">alist(association list)</a></li>
+<li><a href="#plist-property-list">plist(Property list)</a></li>
+</ul></li>
+<li><a href="#array">Array</a>
+<ul>
+<li><a href="#vector">Vector</a></li>
+<li><a href="#bool-vector">bool-vector</a></li>
+<li><a href="#char-table">char-table</a></li>
+<li><a href="#string">string</a></li>
+</ul></li>
+<li><a href="#hash-table-哈希表">Hash Table(哈希表)</a></li>
+</ul></li>
+<li><a href="#emacs基本数据类型小结">emacs基本数据类型小结</a>
+<ul>
+<li><a href="#数据类型间的转换">数据类型间的转换</a></li>
+<li><a href="#对比相等">对比相等</a></li>
+<li><a href="#正则表达式">正则表达式</a></li>
+</ul></li>
+<li><a href="#symbol-符号">Symbol(符号)</a>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#symbol定义">symbol定义</a></li>
+<li><a href="#求值规则和symbol">求值规则和symbol</a></li>
+<li><a href="#symbol组成">symbol组成</a></li>
+<li><a href="#string-和symbol转换">string 和symbol转换</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<h2 id="闲话elisp">闲话elisp</h2>
+
+<blockquote>
+<p>如果说emacs是一出庞大的歌剧，那么elisp则是撑起全场的主角，它犹如一道魅影，神秘、黑暗、引人入胜，在剧初以无以伦比的优雅身姿和独一无二的音色试图唤起观众的灵魂共鸣；当有人尝试接近它的时候，或许期望越大失望越大，藏在另一半面具下是人性特有的丑陋，是受世人侮辱唾弃后难掩的愤怒和敏感；而最后它高尚的选择和坚持让作为学习者的我们不断反思，什么叫做美？不是世俗的外在的可视的，是来源内在的人性之光，能够让灵魂起舞。事实上扯远了，不过大概总结了学习elisp的三个阶段，首先被洗脑认为lisp系语言如同武林传说中的秘籍邪典，迷迷糊糊建立了莫名的崇拜，后来深入学习才发现lisp系语言有固有的缺陷，致使它们在现代背景下难有立足之地，最后在完全了解它们了，发现在语言演变的历史长河它们是那么的独一无二，具有难以言表在时间的美，仿佛洞开了一个新世界。lisp相对现在很古老，在这期间有很多篇文章试图向别人灌输它的思想，这篇文章也是其中一篇，但lisp系语言太庞大，就elisp本身的官方手册都有一千多页，要在一篇文章里面完全展现它是不现实的，只能按笔者自己的有限理解来书写，可能夹杂着不恰当的比喻，希望观者有所悟。</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="七言七日七符">七言七日七符</h2>
+
+<blockquote>
+<p>中国古代只用“七言”寥寥数语就表达出了无尽的情感和哲思，简直是“少即是多”的典范。而在西方传闻上帝仅仅花了七日便创造了世界。so what？说明“七”是吉祥的数字&hellip;&hellip;传说lisp语言在创造之初也仅仅存在七个操作符。分别是 quote,atom,eq,car,cdr,cons以及 cond，如果从这七个角度出发就能化繁为简，理解lisp语言之源。之前的文章有提到三点<strong>操作符前置</strong>、<strong>数据结构</strong>以及<strong>返回机制</strong>，其实都是针对lisp语言的最大特征&ndash;<strong>括号</strong>而言的，在括号里面操作符会前置，遇到括号就执行并返回的机制，在括号外部引入引号让括号返回本身。实际上括号的只体现了lisp语言构成二分一的元素&ndash;语法。而七个操作符体现了语言的另一半组成&ndash;语义。</p>
+</blockquote>
+
+<h3 id="atom">atom</h3>
+
+<p>atom翻译过来是原子，不可分割的意思。可以联想到古代由于科学不发达，许多人都想找到世界里最基本东西，用来理解世界的本质或者掌握其中的运行规律。一个经典的模型就是“五行”&ndash;金木水火土，世间万物的都是由这五种基本元素组成的。基本元素的概念其实就对应着atom，语言中一些基础类型是atom的一种。比如最常见的字符串、数字还有布尔值都是。之前有讲过elisp里面用后缀为<code>p</code>的函数来判断一个object的类型，比如<code>stringp</code>、<code>numberp</code>等等，可是没有<code>atomp</code>，因为atom只是一个笼统的概念，没有实际对应的类型，就干脆把atom当做判断符，用来判断一个object是否是atom。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">atom</span> <span class="s">&#34;hello&#34;</span><span class="p">)</span> <span class="c1">;;==&gt;t</span>
+<span class="p">(</span><span class="nv">atom</span> <span class="mi">233</span><span class="p">)</span>  <span class="c1">;;==&gt;t</span>
+<span class="p">(</span><span class="nv">atom</span> <span class="no">nil</span><span class="p">)</span>  <span class="c1">;;==&gt;t</span>
+<span class="p">(</span><span class="nv">atom</span> <span class="ss">:keyword</span><span class="p">)</span> <span class="c1">;;==&gt;t</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>实际上elisp用<code>type-of</code>返回一个object的具体类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">type-of</span> <span class="s">&#34;hello&#34;</span><span class="p">)</span> <span class="c1">;;==&gt;string</span>
+<span class="p">(</span><span class="nv">type-of</span> <span class="mi">233</span><span class="p">)</span> <span class="c1">;;===&gt;integer</span>
+<span class="p">(</span><span class="nv">type-of</span> <span class="no">nil</span><span class="p">)</span> <span class="c1">;;===&gt;symbol</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="cons-car-cdr">cons、car、cdr</h3>
+
+<p>不得不吐槽一下知道atom这个概念并没什么卵用，其实是为了理解cons这个概念做铺垫。cons可以翻译成序对或者点对，个人更倾向于后者。回到“五行”说，当我们手握五大元素的时候会做什么能更有趣？让它们发生关系！这就是所谓相克相生的运行体系，譬如钻木取火、水来土掩、水火不容等等&hellip;<code>cons</code>就是把两个基本元素(atom)结合的一种数据结构，让单独的atom彼此建立联系，<code>cons</code>这个字符本身就是建立这种结构的函数。如下图所示：</p>
+
+<p>可以看出<code>cons</code>返回的形式是<code>(1 . 2)</code>，所以又可以叫做点对结构。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;consp是用来判断是否是一个点对结构的函数。</span>
+<span class="p">(</span><span class="nv">consp</span> <span class="p">(</span><span class="nv">cons</span> <span class="s">&#34;fire&#34;</span> <span class="s">&#34;water&#34;</span><span class="p">))</span>  <span class="c1">;;毋庸置疑返回t</span>
+<span class="p">(</span><span class="nv">consp</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;fire&#34;</span><span class="o">.</span><span class="s">&#34;water&#34;</span><span class="p">))</span>  <span class="c1">;;居然也返回t，说明也可以用&#39;(xx.oo)的形式构造一个点对。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>而<code>car</code>和<code>cdr</code>是对cons最基本的操作，比如<code>(car (cons &quot;阴&quot; &quot;阳&quot;))</code>会返回<strong>阴</strong>，cons的头部；<code>(cdr (cons &quot;阴&quot; &quot;阳&quot;))</code>则返回<strong>阳</strong>，cons的尾部；相当于一个负责“采阴”，另一个负责“取阳”。
+<code>cons</code>犹如雌雄、阴阳、黑白、天地等相互对立又相互依存的统一矛盾体，不禁让人联想到太极，也如同太极能够演化出两仪四象八卦万物一样，<code>cons</code>理论上也能构造出任何的数据结构，简单而强大。不信请看：
+之前常常提到的list（列表）也是一种特殊的cons，上面第三个例子就是list的结构图，不仅要有“你和我”而且还要大家围在一起手牵手。<code>(cons 1 (cons 2 (cons 3 (cons 4 nil))))</code>这样生成list方式太麻烦所以创造了一个<code>list</code>的函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;下面两个表达式是完全相等的</span>
+<span class="p">(</span><span class="nv">cons</span> <span class="mi">1</span> <span class="p">(</span><span class="nv">cons</span> <span class="mi">2</span> <span class="p">(</span><span class="nv">cons</span> <span class="mi">3</span> <span class="p">(</span><span class="nv">cons</span> <span class="mi">4</span> <span class="no">nil</span><span class="p">))))</span>  <span class="c1">;;==&gt;(1 2 3 4)</span>
+<span class="p">(</span><span class="nv">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1">;;==&gt;(1 2 3 4)</span>
+<span class="c1">;;将233加入到一个list的头部，并返回加入之后的新list</span>
+<span class="p">(</span><span class="nv">cons</span> <span class="mi">233</span> <span class="p">(</span><span class="nv">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1">;;==&gt;(233 1 2 3 4)</span>
+<span class="c1">;;用consp来判断</span>
+<span class="p">(</span><span class="nv">consp</span> <span class="p">(</span><span class="nv">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1">;;==&gt; t</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于cons存在无限的可能，<code>car</code>和<code>cdr</code>这种一次只取一步的操作显然就不合时宜。于是乎创造出各种延伸变异版本的car和cdr，简直丧心病狂。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span><span class="lnt">7</span><span class="lnt">8</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;X代表某种cons复合结构。</span>
+<span class="p">(</span><span class="nv">caar</span> <span class="nv">X</span><span class="p">)</span>  <span class="c1">;;Return the car of the car of X.</span>
+<span class="p">(</span><span class="nv">cddr</span> <span class="nv">X</span><span class="p">)</span>  <span class="c1">;;Return the cdr of the cdr of X.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="p">(</span><span class="nv">caaaar</span> <span class="nv">X</span><span class="p">)</span> <span class="c1">;;Return the `car&#39; of the `car&#39; of the `car&#39; of the `car&#39; of X.</span>
+<span class="p">(</span><span class="nv">cddddr</span> <span class="nv">X</span><span class="p">)</span> <span class="c1">;;Return the `cdr&#39; of the `cdr&#39; of the `cdr&#39; of the `cdr&#39; of X.</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>实际上，<code>cons</code>更常用于表示概念名称和具体实物之间的关联，像<code>(cons key value)</code>或者<code>'(key . value)</code>便可以表达一个物体。更实际的是，虽然cons结构能千变万化，但是对内存的效率却不高，所以lisp方言们都吸取了其他语言的数据结构，比如数组(array)、哈希表(hash table)等等来提高操作数据的效率，诚然，这样会让lisp方言们摇身一变成了“通用性的语言”，更易于其他程序猿的接受和自身的推广，但点对结构不该被遗忘或抛弃，它是lisp纯粹本质的体现之一。</p>
+
+<h3 id="quote">quote</h3>
+
+<p><code>quote</code>在之前已经提到过了，其实等同于<code>'</code>，引号是quote的简写，<code>(quote a)</code>完全等同于<code>'a</code>。之前还提到过因为lisp语法只要遇到括号就会根据前置的“操作符”求值返回，<code>quote</code>的存在就是对抗这种固化的机制而存在的。可以说没有quote的lisp里面都是“一个求值过程”，quote不求值只返回，数据就很容易构造出来，说到底quote 的存在是由于lisp代码和数据都是都用统一的S表达式带来了困扰。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">quote</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>
+<span class="c1">;;等同于</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1">;;等同于</span>
+<span class="p">(</span><span class="nv">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这种不求值只返回的机制不仅仅用于构建数据，自然还可以让代码不求值返回，让代码之上又有的一层机制，为神奇的宏的出现埋好了伏笔。</p>
+
+<h3 id="eq">eq</h3>
+
+<p>判断相等的，我至今不明白为什么eq会位列七个操作符之内，它看起来并不是很重要。它的定义是：(eq x y)，如果x和y是同一个原子(atom)或者空表(cons)，则返回t，否则返回nil。eq是最表面的判断，equal才是更深入的判断，之后会罗列elisp里面所以和判断相等有关的函数。</p>
+
+<h3 id="cond">cond</h3>
+
+<p>cond是控制结构，类似其他语言里面的select-case控制功能，为什么七个操作符里面没有if，大概cond可以判断一种或者多种条件进行跳转，if只能一个或者两个条件，多种条件要不停的嵌套。
+形如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span><span class="lnt">6</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">cond</span> 
+    <span class="p">((</span><span class="nv">条件1</span><span class="p">)</span> <span class="nv">表达式1</span><span class="p">)</span>
+    <span class="p">((</span><span class="nv">条件2</span><span class="p">)</span> <span class="nv">表达式2</span><span class="p">)</span>
+    <span class="p">((</span><span class="nv">条件3</span><span class="p">)</span> <span class="nv">表达式3</span><span class="p">)</span>
+    <span class="p">((</span><span class="nv">条件4</span><span class="p">)</span> <span class="nv">表达式4</span><span class="p">)</span>
+<span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从上到下依次执行，直到遇到条件表达式返回值为t，则将该条件后面表达式的值当做整个cond表达式的返回值。</p>
+
+<h2 id="elisp的基本数据类型">elisp的基本数据类型</h2>
+
+<blockquote>
+<p>回到elisp，基本数据类型有些和其他语言差不多，限于篇幅，挑重点讲。</p>
+</blockquote>
+
+<h3 id="integer">integer</h3>
+
+<p>整型，#bNNN表示二进制数，同理有#o(八进制数)、#x(十六进制数)。</p>
+
+<h3 id="float">float</h3>
+
+<p>INF表示无穷大。</p>
+
+<h3 id="char">Char</h3>
+
+<p>Char其实就是integer，字符型用整数型对应的编码表示了而已。可以用<code>?字母</code>来打印字面量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">prin1</span> <span class="nv">?a</span><span class="p">)</span> <span class="c1">;;==&gt;97</span>
+<span class="p">(</span><span class="nv">prin1</span> <span class="nv">?A</span><span class="p">)</span> <span class="c1">;;==&gt;65</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>也和其他语言的一样，<code>\n</code>来表示空一行，<code>\t</code>表示TAB键等等，elisp里面多了几个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="nv">?\a</span> <span class="c1">;=&gt; 7                 ; control-g, `C-g&#39;</span>
+<span class="nv">?\b</span> <span class="c1">;=&gt; 8                 ; backspace, &lt;BS&gt;, `C-h&#39;</span>
+<span class="nv">?\t</span> <span class="c1">;=&gt; 9                 ; tab, &lt;TAB&gt;, `C-i&#39;</span>
+<span class="nv">?\n</span> <span class="c1">;=&gt; 10                ; newline, `C-j&#39;</span>
+<span class="nv">?\v</span> <span class="c1">;=&gt; 11                ; vertical tab, `C-k&#39;</span>
+<span class="nv">?\f</span> <span class="c1">;=&gt; 12                ; formfeed character, `C-l&#39;</span>
+<span class="nv">?\r</span> <span class="c1">;=&gt; 13                ; carriage return, &lt;RET&gt;, `C-m&#39;</span>
+<span class="nv">?\e</span> <span class="c1">;=&gt; 27                ; escape character, &lt;ESC&gt;, `C-[&#39;</span>
+<span class="nv">?\s</span> <span class="c1">;=&gt; 32                ; space character, &lt;SPC&gt;</span>
+<span class="nv">?\\</span> <span class="c1">;=&gt; 92                ; backslash character, `\&#39;</span>
+<span class="nv">?\d</span> <span class="c1">;=&gt; 127               ; delete character, &lt;DEL&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="elisp的容器类型">elisp的容器类型</h2>
+
+<blockquote>
+<p>也是基础的数据结构，因为具有容纳的作用，而且彼此之间是有联系的，所以独起一章。这么多的容器式数据类型，区别它们的无非两点：存储的数据类型和底层的存储形式。关系如下图：</p>
+</blockquote>
+
+<p>Sequence（序列）是hash-table外所有容器类型的总称了。用<code>(length aSequence)</code>获取Sequence的长度，<code>(elt sequence N)</code>来获取第N个元素，对任何一种序列都有用。</p>
+
+<h3 id="list">List</h3>
+
+<p>list是特殊的cons点对结构，是emacs里面最常见的数据类型。</p>
+
+<ol>
+<li>创建list:使用list函数<code>(list 1 2 3 4)</code>或者<code>'(1 2 3 4)</code></li>
+<li>获取list里面的元素</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(car X)</td>
+<td>first element</td>
+</tr>
+
+<tr>
+<td>(nth n X)</td>
+<td>nth element (start from 0)</td>
+</tr>
+
+<tr>
+<td>(car (last X))</td>
+<td>last element</td>
+</tr>
+
+<tr>
+<td>(cdr X)</td>
+<td>2nd to last elements</td>
+</tr>
+
+<tr>
+<td>(nthcdr n X)</td>
+<td>nth to last elements</td>
+</tr>
+
+<tr>
+<td>(butlast X n)</td>
+<td>without the last n elements</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li>在list头部添加元素:(cons element mylist)</li>
+<li>合并两个list:(append list1 list2)</li>
+<li>判断list是否为空:<strong>null</strong></li>
+<li>判断某个元素是否存在：<code>(member element X)</code></li>
+<li>返回元素所在的位置:<code>(position element X)</code></li>
+</ol>
+
+<h4 id="alist-association-list">alist(association list)</h4>
+
+<p>alist是elisp里面非常重要的概念，理解了点对结构之后，alist其实是把一组cons组织成一个列表，每个元素就是一个cons。形如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span><span class="lnt">5</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">list</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="nv">key1</span> <span class="o">.</span> <span class="nv">value1</span><span class="p">)</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="nv">key2</span> <span class="o">.</span> <span class="nv">value2</span><span class="p">)</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="nv">key3</span> <span class="o">.</span> <span class="nv">value3</span><span class="p">)</span>
+<span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>emacs里面组织存放一组变量的最常见的形式。值得一提的是alist里面的元素是顺序的，且允许重复键值。
+一个非常有用的函数<strong>assoc</strong>，用key来寻找value，key的匹配使用的是equal。这么用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;构建一个alist，并把它赋给dict</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">dict</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="nv">pine</span> <span class="o">.</span> <span class="nv">cones</span><span class="p">)</span>
+ <span class="p">(</span><span class="nv">oak</span> <span class="o">.</span> <span class="nv">acorns</span><span class="p">)</span>
+ <span class="p">(</span><span class="nv">maple</span> <span class="o">.</span> <span class="nv">seeds</span><span class="p">)))</span>
+<span class="c1">;;使用assoc，找到对应的cons并返回</span>
+<span class="p">(</span><span class="nv">assoc</span> <span class="ss">&#39;oak</span> <span class="nv">dict</span><span class="p">)</span> <span class="c1">;;==&gt;(oak . acorns)</span>
+<span class="c1">;;结合car、cdr可以把cons里面key和value分别取出来</span>
+<span class="p">(</span><span class="nv">car</span> <span class="p">(</span><span class="nv">assoc</span> <span class="ss">&#39;oak</span> <span class="nv">dict</span><span class="p">))</span>  <span class="c1">;;==&gt;oak</span>
+<span class="p">(</span><span class="nv">cdr</span> <span class="p">(</span><span class="nv">assoc</span> <span class="ss">&#39;oak</span> <span class="nv">dict</span><span class="p">))</span>  <span class="c1">;;==&gt;acorns</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="plist-property-list">plist(Property list)</h4>
+
+<p>顾名思义，属性列表，其作用和alist相似，不过语法更加清晰些。形如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="o">&#39;</span><span class="p">(</span><span class="ss">:key1</span> <span class="nv">value1</span> <span class="ss">:key2</span> <span class="nv">value2</span> <span class="ss">:key3</span> <span class="nv">value3</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>注意<code>:</code>是不能省略的，而且key的值必须是唯一的。用plist-get取出值，plist-put来加入新的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;构建一个plist，并把它赋给plst</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">plst</span> <span class="p">(</span><span class="nv">list</span> <span class="ss">:buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">)</span> <span class="ss">:line</span> <span class="mi">10</span> <span class="ss">:pos</span> <span class="mi">2000</span><span class="p">))</span>
+<span class="c1">;;plist-get取出值</span>
+<span class="p">(</span><span class="nv">plist-get</span> <span class="nv">plst</span> <span class="ss">:pos</span><span class="p">)</span> <span class="c1">;;==&gt;2000</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="array">Array</h3>
+
+<p>创建Array需要指定一个固定长度，除了char-table，这点限制了它的使用。
+除了从sequence继承过来的<strong>length</strong>和<strong>elt</strong>函数，array本身也有几个函数，对下属的类型都有效。
+设置元素位置和值：<code>(aset array index value)</code></p>
+
+<h4 id="vector">Vector</h4>
+
+<ol>
+<li>创建一个Vector：两种形式<code>[v1 v2 v3 ...]</code>和<code>(vector v1 v2 v3 ...)</code>，显然引入了<code>[]</code>，在一堆括号里面也另类。</li>
+<li>将多个sequence合并成为一个vector：<code>(voncat seq1 seq2)</code></li>
+<li>vector和list的转换：<code>(append vector nil)</code></li>
+</ol>
+
+<h4 id="bool-vector">bool-vector</h4>
+
+<ol>
+<li>bool-vector是vector的子集，只能用来存放nil或t。</li>
+<li>创建 bool-vector：<code>(make-bool-vector LENGTH INIT)</code>。</li>
+</ol>
+
+<h4 id="char-table">char-table</h4>
+
+<h4 id="string">string</h4>
+
+<ol>
+<li>string是不可变的，这点和大部分的语言一致</li>
+<li>string可以包含文本属性properties，形如<code>#(&quot;str&quot; property-data)</code>，property-data是以plist形式包含了string的一些属性。</li>
+<li>string用<code>string=</code>和<code>string&lt;</code>进行对比。</li>
+</ol>
+
+<h3 id="hash-table-哈希表">Hash Table(哈希表)</h3>
+
+<blockquote>
+<p>在其他语言比较常见的类型，数据容量到达一定级别速度依旧非常快，没有特殊的顺序要求，但不能重复。如果是小型数据装载还是建议用list，大集合用哈希表。</p>
+</blockquote>
+
+<ol>
+<li><p>创建的哈希表时候可以根据一些关键字<code>:key</code>来指定初始属性。</p>
+
+<ul>
+<li>:test 因为哈希表里面的key值要求不能重复，所以key值需要比较，这个关键字指定key值比较的函数，可以是<code>eq</code>、<code>eql</code>、<code>equal</code>，默认是<code>eql</code>。</li>
+<li>:size 指定初始容量大小</li>
+</ul></li>
+
+<li><p>访问hash table相关的函数：</p>
+
+<ul>
+<li>(gethash KEY TABLE)</li>
+<li>(puthash KEY VALUE TABLE)</li>
+<li>(remhash KEY TABLE):移除某个元素</li>
+<li>(clrhash TABLE):清理hash table</li>
+<li>(maphash FUNCTION TABLE):对每个元素都应用FUNCTION</li>
+</ul></li>
+
+<li><p>拷贝：<code>(copy-hash-table table)</code></p></li>
+
+<li><p>个数：<code>(hash-table-count table)</code></p></li>
+</ol>
+
+<h2 id="emacs基本数据类型小结">emacs基本数据类型小结</h2>
+
+<h3 id="数据类型间的转换">数据类型间的转换</h3>
+
+<ol>
+<li>number-to-string/string-to-number</li>
+
+<li><p>concat可以将序列转换成字符串：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">concat</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">?a</span> <span class="nv">?b</span> <span class="nv">?c</span> <span class="nv">?d</span> <span class="nv">?e</span><span class="p">))</span> <span class="c1">; =&gt; &#34;abcde&#34;</span>
+<span class="p">(</span><span class="nv">concat</span> <span class="nv">[?a</span> <span class="nv">?b</span> <span class="nv">?c</span> <span class="nv">?d</span> <span class="nv">?e]</span><span class="p">)</span> <span class="c1">; =&gt; &#34;abcde&#34;</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>vconcat 把字符串转换成向量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">vconcat</span> <span class="s">&#34;abcde&#34;</span><span class="p">)</span> <span class="c1">;;==&gt;[97 98 99 100 101]</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>append原来是用来拼接两个list或者向list添加元素的，这里也可以把字符串转换成一个列表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">append</span> <span class="s">&#34;abcdef&#34;</span> <span class="no">nil</span><span class="p">)</span> <span class="c1">; =&gt; (97 98 99 100 101 102)</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>字母大小写：downcase、upcase、capitalize</p></li>
+
+<li><p>转换数字为float类型：<code>(float number)</code></p></li>
+
+<li><p>float转integer：ceiling、round</p></li>
+</ol>
+
+<h3 id="对比相等">对比相等</h3>
+
+<ol>
+<li><code>(eq OBJ1 OBJ2)</code>：只是简单的对比两个object是否相等。</li>
+
+<li><p><code>(eql OBJ1 OBJ2)</code>：比eq高级一个点，遇到数字的时候还会判断数字的类型和大小。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;除了数值为1，一个为整数一个为浮点数，所以为nil</span>
+<span class="p">(</span><span class="nv">eql</span> <span class="mi">1</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c1">;;==&gt;nil</span>
+<span class="c1">;;类型和数值都一样才返回t</span>
+<span class="p">(</span><span class="nv">eql</span> <span class="mf">1.0</span> <span class="mf">1.0</span><span class="p">)</span> <span class="c1">;;==&gt;t</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p><code>(equal O1 O2)</code>：因为比上面两个都长，所以更加深入，比较类型、数值以及结构全部相等情况，最常用的比较。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;下面左右两个都是cons结构的生成方式，所以返回t</span>
+<span class="p">(</span><span class="nv">equal</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="o">.</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="nv">cons</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">;;==&gt;t</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p><code>=</code>：数字比较，主要针对值，<code>(= 2 2.0)</code>返回t。</p></li>
+
+<li><p><code>string=</code>和<code>string-equal</code>：两者是一样的，前者是后者的别名，比较字符串是否相等。</p></li>
+</ol>
+
+<h3 id="正则表达式">正则表达式</h3>
+
+<p>之前已经讲到正则常用的函数<code>string-match</code>和<code>look-at</code>，前者必须指定正则表达式和需要匹配的字符串，而look-at则是从此buffer的光标开始出进行匹配。
+elisp的正则语法和其他语言基本一致，但有一点特别丑陋，像<code>(,) {,} \</code>等都需要转义才能使用，因为&rdquo;\&ldquo;也需要转义所以需要以&rdquo;\&ldquo;形式转义其他字符，比如匹配四位数字的正则&rdquo;[0-9]\{4\}&ldquo;。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;匹配2016这个数字</span>
+<span class="p">(</span><span class="nv">string-match</span> <span class="s">&#34;[0-9]\\{4\\}&#34;</span> <span class="s">&#34;欢迎2016的到来&#34;</span><span class="p">)</span>
+<span class="c1">;;中间参数0代表第0分组，也就是所有分组。</span>
+<span class="p">(</span><span class="nv">match-string</span> <span class="mi">0</span> <span class="s">&#34;欢迎2016的到来&#34;</span><span class="p">)</span> <span class="c1">;;==&gt;&#34;2016&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="symbol-符号">Symbol(符号)</h2>
+
+<h3 id="概述">概述</h3>
+
+<p>理解symbol是理解elisp的关键。当初在elisp成形的时候，面向对象的思想还没这么盛行，这种思想用继承和实例化的方式结构化地梳理代码间的关系，尤为重要的是对象状态的组织和存储以一种非常合理的形式呈现。elisp没有包含面向对象的思想，所以不现代很落后。就像用对象来指代一切很多现代语言一样，symbol是elip 里面的通用货币。symbol可以<strong>同时</strong>拥有下面四种值:
+1. &ldquo;name&rdquo;，symbol-name符号名字
+2. &ldquo;value&rdquo;，存储的变量值
+3. &ldquo;function&rdquo;，存储的函数或者宏
+4. &ldquo;property list&rdquo;，存储的属性列表</p>
+
+<h3 id="symbol定义">symbol定义</h3>
+
+<p>symbol具有唯一的名字，它拥有四个Cell，cell应该翻译成“槽”或者“域”，作用就是存储指向以上四个值的“指针”。symbol 名字定义的规则很简单，就是<code>(quote name)</code>或者<code>'name</code>，单引号+普通字符，遇到特殊的字符该转义的还是得转义，比如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">symbolp</span> <span class="ss">&#39;+1</span><span class="p">)</span>  <span class="c1">;;==&gt;nil</span>
+<span class="p">(</span><span class="nv">symbolp</span> <span class="ss">&#39;\+1</span><span class="p">)</span>  <span class="c1">;;==&gt;t</span>
+<span class="c1">;;使用symbol-name获得名字</span>
+<span class="p">(</span><span class="nv">symbol-name</span> <span class="ss">&#39;\+1</span><span class="p">)</span> <span class="c1">;;==&gt;&#34;+1&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="求值规则和symbol">求值规则和symbol</h3>
+
+<p>现在完全总结一下elisp里面的求值规则，一共三种：
+1. 第一种就是自求值，数字、字符串、cons以及nil、t等会直接返回它所拥有的值。
+2. 第二种是本节讨论的符号，符号虽然是使用了单引号这种形式，但它会根据不同环境或者“操作符”从cells里面返回不同值。
+3. 第三种是列表求值，之前说的“遇到括号就返回”，如果在括号外围有quote或者单引号只会返回列表本身。
+也可以用<code>(eval 表达式)</code>方式来主动求值（evaluation），相当于抵消quote的作用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;下面两个表达式是完全相等的</span>
+<span class="p">(</span><span class="nv">+</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">;;==&gt;14</span>
+<span class="p">(</span><span class="nv">eval</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">+</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">))</span> <span class="c1">;;==&gt;14</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="symbol组成">symbol组成</h3>
+
+<p>用<code>(set (quote sym) val)</code>可将值赋给一个符号，看起来太麻烦了，用<code>(setq sym val)</code>是同样的效果，其中val不能是自求值类型，占有一个符号中的cell只能是一个不能自求值类型。如果是自求值类型的话symbol不再是symbol而只是一个<strong>变量</strong>。
+1. value cell的存储和取出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span><span class="lnt">11</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;如果是基本类型直接赋值的话，根本不会当符号处理，因为它们返回自求值</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">num</span> <span class="mi">123</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">symbol-value</span> <span class="nv">num</span><span class="p">)</span> <span class="c1">;;==&gt;*** Eval error ***  Wrong type argument: symbolp,123</span>
+<span class="p">(</span><span class="nv">symbolp</span> <span class="nv">num</span><span class="p">)</span> <span class="c1">;;==&gt;nil</span>
+<span class="p">(</span><span class="nv">type-of</span> <span class="nv">num</span><span class="p">)</span> <span class="c1">;;==&gt;integer</span>
+<span class="c1">;;但是将num这个变量使用quote的话，就变成一个符号</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">sym</span><span class="err">—</span><span class="nv">num</span> <span class="ss">&#39;num</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">symbolp</span> <span class="nv">sym-num</span><span class="p">)</span> <span class="c1">;;==&gt;t</span>
+<span class="c1">;;symbol-value 的作用是从cell里面取出符号并进行eval</span>
+<span class="p">(</span><span class="nv">symbol-value</span> <span class="nv">sym-num</span><span class="p">)</span> <span class="c1">;;==&gt;123</span>
+<span class="c1">;;也可以先判断一个symbol是否已经绑定一个变量值</span></code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>function cell 的存储和取出
+<code>lisp
+;;使用symbol-function取出操作
+(symbol-function 'car) ;;==&gt; #&lt;subr car&gt;
+;;使用fset将上节sym-num这个符号的function cell存储一个函数
+(fset sym-num 'car) ;;==&gt;car
+;;fboundp来判断是否有绑定函数
+(fboundp sym-num) ;;==&gt;t
+;;用funcall来调用
+(funcall sym-num '(a . b)) ;;==&gt;a
+</code></li>
+
+<li><p>property list属性列表，属性列表为了变量和函数存在的，用来存储附加属性或者状态。形如(pro1 value1 pro2 value2&hellip;)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt"> 1</span><span class="lnt"> 2</span><span class="lnt"> 3</span><span class="lnt"> 4</span><span class="lnt"> 5</span><span class="lnt"> 6</span><span class="lnt"> 7</span><span class="lnt"> 8</span><span class="lnt"> 9</span><span class="lnt">10</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;使用put 和 get 分配或者取出操作，貌似一次只能分配一次</span>
+<span class="p">(</span><span class="nv">put</span> <span class="nv">sym-num</span> <span class="ss">:key</span> <span class="s">&#34;value1&#34;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">put</span> <span class="nv">sym-num</span> <span class="ss">:color</span> <span class="s">&#34;blue&#34;</span><span class="p">)</span>
+<span class="c1">;;&#34;:key&#34;是一种特殊的符号，一般用在property list 和hash table 里面</span>
+<span class="p">(</span><span class="nv">get</span> <span class="nv">sym-num</span> <span class="ss">:color</span><span class="p">)</span> <span class="c1">;;==&gt;&#34;blue&#34;</span>
+<span class="c1">;;symbol-plist获取整个属性列表</span>
+<span class="p">(</span><span class="nv">symbol-plist</span> <span class="nv">sym-num</span><span class="p">)</span> <span class="c1">;;==&gt;(group-documentation &#34;The X Window system.&#34; :key &#34;value1&#34; :color &#34;blue&#34;)</span>
+<span class="c1">;;把symbol-plist单独提取出来自然可以用plist-get和plist-put操作</span>
+<span class="p">(</span><span class="nv">setq</span> <span class="nv">my-plist</span> <span class="p">(</span><span class="nv">symbol-plist</span> <span class="nv">sym-num</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">plist-get</span> <span class="nv">my-plist</span> <span class="ss">:color</span><span class="p">)</span> <span class="c1">;;==&gt;&#34;blue&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="string-和symbol转换">string 和symbol转换</h3>
+
+<p>值得一提的是，字符串和符号之间可以直接转换。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span><span class="lnt">4</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;;将symbol 转换成string</span>
+<span class="p">(</span><span class="nv">symbol-name</span> <span class="ss">&#39;sym-num</span><span class="p">)</span>
+<span class="c1">;;将string 转换成symbol</span>
+<span class="p">(</span><span class="nv">intern</span> <span class="s">&#34;minecraft&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>未完待续&hellip;&hellip;</p></li>
+</ol>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-02-28</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/emacs/">emacs</a>
+          
+          <a href="/tags/tutorial/">tutorial</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">初识postgresql以及在Flask里面的关联使用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/">
+            <span class="next-text nav-default">emacs完全补完计划(四)--API大考古</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>

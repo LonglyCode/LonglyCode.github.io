@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on 记忆和记忆的补完</title>
+    <link>http://LonglyCode.github.io/tags/git/</link>
+    <description>Recent content in Git on 记忆和记忆的补完</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>LonglyCode</copyright>
+    <lastBuildDate>Sun, 24 Jan 2016 23:40:05 +0000</lastBuildDate>
+    
+	<atom:link href="http://LonglyCode.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git使用小结</title>
+      <link>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
+      <pubDate>Sun, 24 Jan 2016 23:40:05 +0000</pubDate>
+      
+      <guid>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
+      <description>&lt;!-- toc --&gt;
+
+&lt;h2 id=&#34;git-一些原理和概念&#34;&gt;git 一些原理和概念&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在本地有三个区域：工作区，staged 区以及本地仓库，当然还有一个抽象的概念的就是分支&lt;/li&gt;
+&lt;li&gt;远程有：远程仓库和分支&lt;/li&gt;
+&lt;li&gt;HEAD 是个指针，指向 git 自动帮我们创建的第一个分支 master。master 才指向提交的，提交到远程
+&amp;gt; 几乎所有的操作的都是基于以上的区域的，值得一提一点：本地的 git 仓库和 github 仓库之间的传输是通过 SSH 加密的&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

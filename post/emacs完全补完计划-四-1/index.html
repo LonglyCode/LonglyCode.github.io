@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>emacs完全补完计划(四)--API大考古 - 记忆和记忆的补完</title>
+  <link rel="alternate" hreflang="en" href="http://LonglyCode.github.io" />
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="LonglyCode" />
+  <meta name="description" content=" 查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。
+ 
+" />
+
+  <meta name="keywords" content="Golang, Python, Emacs, Program" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.35-DEV" />
+
+
+<link rel="canonical" href="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+<link href="/dist/jane.min.css?v=2.7.0" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="emacs完全补完计划(四)--API大考古" />
+<meta property="og:description" content="
+
+
+查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/" />
+
+
+
+<meta property="article:published_time" content="2016-02-19T23:36:37&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-02-19T23:36:37&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="emacs完全补完计划(四)--API大考古">
+<meta itemprop="description" content="
+
+
+查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。
+
+
+">
+
+
+<meta itemprop="datePublished" content="2016-02-19T23:36:37&#43;00:00" />
+<meta itemprop="dateModified" content="2016-02-19T23:36:37&#43;00:00" />
+<meta itemprop="wordCount" content="4580">
+
+
+
+<meta itemprop="keywords" content="emacs,API," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="emacs完全补完计划(四)--API大考古"/>
+<meta name="twitter:description" content="
+
+
+查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">记忆和记忆的补完</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      记忆和记忆的补完
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/">Home</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/post/">Archives</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+      <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="http://LonglyCode.github.io/about/">About</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">emacs完全补完计划(四)--API大考古</h1>
+      
+      <div class="post-meta">
+        <span class="post-time"> 2016-02-19 </span>
+        
+        <span class="more-meta"> 4580 words </span>
+        <span class="more-meta"> 10 min read </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#如何查看内部文档">如何查看内部文档？</a></li>
+<li><a href="#怎么测试运行elisp代码">怎么测试运行elisp代码？</a></li>
+<li><a href="#emacs-中的术语">Emacs 中的术语</a></li>
+<li><a href="#buffer">Buffer</a>
+<ul>
+<li><a href="#buffer对象本身">buffer对象本身</a></li>
+<li><a href="#buffer文本操作">buffer文本操作</a></li>
+<li><a href="#buffer中查找和替换">buffer中查找和替换</a></li>
+<li><a href="#save-current-buffer保存现场">save-current-buffer保存现场</a></li>
+</ul></li>
+<li><a href="#编辑操作">编辑操作</a>
+<ul>
+<li><a href="#point">Point</a>
+<ul>
+<li><a href="#获得point">获得Point</a></li>
+<li><a href="#光标移动">光标移动</a></li>
+<li><a href="#thing-at-point">thing-at-point</a></li>
+</ul></li>
+<li><a href="#region-mark">Region/Mark</a></li>
+<li><a href="#marker">Marker</a></li>
+</ul></li>
+<li><a href="#window">window</a></li>
+<li><a href="#file-directory">file、directory</a>
+<ul>
+<li><a href="#file和directory">file和directory</a></li>
+<li><a href="#file-name和directory">file-name和directory</a></li>
+</ul></li>
+<li><a href="#os-api-操作系统接口">OS API(操作系统接口)</a>
+<ul>
+<li><a href="#commands-和-apps">Commands 和 Apps</a></li>
+<li><a href="#environment-variables-环境变量">Environment Variables(环境变量)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <!-- toc -->
+
+<blockquote>
+<p>查找和学会使用API最好的方法是阅读官方文档，这篇文章着重讲一些emacs常用的概念和API惯用方法，之前提到的buffer、mode等都是从构架层次上来讲的，这次要具体的分析，所有编辑器的刚需都差不多，所以概念的东西都一样，重要的是如何使用。</p>
+</blockquote>
+
+<p></p>
+
+<h2 id="如何查看内部文档">如何查看内部文档？</h2>
+
+<p>emacs内部文档完整且条理清晰，这也是我投入到emacs的重要原因之一。使用<strong>M-x info</strong>或者默认绑定键<strong>C-h i</strong>，可以按分类阅读内置文档。或者按关键字索引文档，这么用<strong>M-x info-apropos</strong>，非常有用的命令，建议绑定一个常用快键键。进入文档后，以下是阅读文档的正确姿势：</p>
+
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>SPC</td>
+<td>下翻一页，可越过章节</td>
+</tr>
+
+<tr>
+<td>BACKSAPCE</td>
+<td>向上翻一页，可越过章节</td>
+</tr>
+
+<tr>
+<td>b</td>
+<td>跳到本章节开始处</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>下个同级章节</td>
+</tr>
+
+<tr>
+<td>p</td>
+<td>上个同级章节</td>
+</tr>
+
+<tr>
+<td>]</td>
+<td>下个章节</td>
+</tr>
+
+<tr>
+<td>[</td>
+<td>上个章节</td>
+</tr>
+
+<tr>
+<td>u</td>
+<td>父章节</td>
+</tr>
+
+<tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+
+<tr>
+<td>?</td>
+<td>帮助列表</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="怎么测试运行elisp代码">怎么测试运行elisp代码？</h2>
+
+<p><img src="../images/ielm1.png" alt="图片" />
+上图包含了elisp运行的方法，结合两个buffer，一个名为scratch，可以临时书写代码并运行查看结果；另一个为IELM，可按<strong>M-x ielm</strong>打开，和其他脚本语言一样用来REPL(read eval print loop)。
+下图演示了两者的关联。
+<img src="../images/ielm2.png" alt="图片" /></p>
+
+<p>其实这两个命令分别绑定 <code>eval-print-last-sexp</code>和<code>eval-last-sexp</code>，<strong>eval</strong>就是用来执行elisp代码的，以下是相关的函数：</p>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>eval-last-sexp</td>
+<td>执行上一个elisp表达式</td>
+</tr>
+
+<tr>
+<td>eval-print-last-sexp</td>
+<td>执行并打印上一个elisp表达式</td>
+</tr>
+
+<tr>
+<td>eval-defun</td>
+<td>执行定义的函数（其实就是把定义的函数加入到当前emacs执行环境当中）</td>
+</tr>
+
+<tr>
+<td>eval-region</td>
+<td>执行选中的区域代码</td>
+</tr>
+
+<tr>
+<td>eval-current-buffer</td>
+<td>执行当前buffer所有代码</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="emacs-中的术语">Emacs 中的术语</h2>
+
+<p>Emacs中有些术语过于古老（好魔幻的感觉），下图是对应现代编辑器的概念：</p>
+
+<table>
+<thead>
+<tr>
+<th>EMACS术语</th>
+<th>现代概念</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Point</td>
+<td>Point</td>
+<td>光标位置</td>
+</tr>
+
+<tr>
+<td>Buffer</td>
+<td>Buffer</td>
+<td>和其他编辑器的概念一样</td>
+</tr>
+
+<tr>
+<td>Mark</td>
+<td>select</td>
+<td>选择一段文字</td>
+</tr>
+
+<tr>
+<td>Region</td>
+<td>selection</td>
+<td>被选中的区域，Mark的作用结果</td>
+</tr>
+
+<tr>
+<td>Windows</td>
+<td>Windows</td>
+<td>操作窗口</td>
+</tr>
+
+<tr>
+<td>Yank</td>
+<td>Copy</td>
+<td>复制</td>
+</tr>
+
+<tr>
+<td>Kill</td>
+<td>Cut</td>
+<td>剪切</td>
+</tr>
+
+<tr>
+<td>Kill Ring</td>
+<td>Clipboard</td>
+<td>剪切板</td>
+</tr>
+
+<tr>
+<td>fringe</td>
+<td>gutter/margin</td>
+<td>左右边栏</td>
+</tr>
+
+<tr>
+<td>Font Locking</td>
+<td>Syntax highlight</td>
+<td>语法高亮控制</td>
+</tr>
+
+<tr>
+<td>face</td>
+<td>style</td>
+<td>样式、装饰，涉及Font、color等</td>
+</tr>
+
+<tr>
+<td>imenu</td>
+<td>function list/symbol list</td>
+<td>显示函数和变量的列表</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="buffer">Buffer</h2>
+
+<blockquote>
+<p>buffer是编辑器最基本的构成，其他部件都可以说是依附其上。又因为编辑器管理的是多个buffer，所以会有个buffer list，也有相应的列表函数，对buffer操作的函数应该最多。</p>
+</blockquote>
+
+<h3 id="buffer对象本身">buffer对象本身</h3>
+
+<p>有些函数能够望文生义，这里仅做记录，不做说明，如要使用参考自带文档即可：</p>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>buffer-list</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>buffer-name</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>get-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>kill-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>erase-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>save-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>rename-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>set-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>buffer-file-name</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>previous-buffer</td>
+<td>省略</td>
+</tr>
+
+<tr>
+<td>next-buffer</td>
+<td>省略</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li><p>current-buffer 和 with-current-buffer
+<code>(current-buffer)</code>直接返回当前的对象，<strong>with-current-buffer</strong>则在当前buffer下执行代码，相当于把代码包含到当前buffer上下文内：<code>(with-current-buffer buffer对象或者buffer名称 代码)</code></p></li>
+
+<li><p>generate-new-buffer：新建buffer对象，若已存在也会新建，则在同名的buffer基础加上递增的数字后缀。</p></li>
+
+<li><p>window-buffer:获得窗口对应的buffer，<code>(window-buffer &amp;optional WINDOW)</code>，输入的是window对象。</p></li>
+</ol>
+
+<h3 id="buffer文本操作">buffer文本操作</h3>
+
+<p>操作buffer里面的文本内容相关的函数：
+1. buffer-string: 获得整个buffer的文本内容
+2. buffer-substring 和 buffer-substring-no-properties:获得buffer某些区间的文本内容，后面返回纯文本内容，前者则包含了一些text专属的properties。
+3. insert、insert-char、insert-string、insert-buffer-substring-no-properties:插入操作，根据后缀可以看出它们的不同用途。所有的插入，是根据当前buffer光标位置而言的。
+4. insert-file-contens:插入某个文件的内容。</p>
+
+<h3 id="buffer中查找和替换">buffer中查找和替换</h3>
+
+<p>查找和替换难免会涉及到正则表达式，以后会详细说明，现在提有用到的函数：
+1. string-match
+  搜索文本，<code>(string-match REGEXP STRING &amp;optional START)</code>后面接着一个正则表达式和需要搜索的内容，最后参数可选择搜索的起始位置。
+2. match-string以及match-beginning/match-end/match-data
+  <code>(match-string N)</code> 返回上次正则查询的第N个分组的内容。<code>(match-beginning N)</code>获得上次正则查询第N个分组的起始字符，match-end同上。match-data以列表的形式返回上次查找的内容。
+3. replace-match
+  替换操作，需要与其他的search类函数配合，替代search匹配的文本。
+4. replace-regexp
+  以正则方式查找并替换。
+5. looking-at
+  <code>(looking-at REGEXP)</code> 一般用作判断文本是否存在。</p>
+
+<h3 id="save-current-buffer保存现场">save-current-buffer保存现场</h3>
+
+<p><code>(save-current-buffer 表达式)</code>保存当前buffer，执行其中的表达式，完成后又回到原来的buffer。这个是常用的伎俩，还有两个类似的函数：
+   1. <code>(save-excursion 表达式)</code>执行完又回到原来的光标位置，随处可见。
+   2. <code>(save-window-excursion 表达式)</code>针对window的。</p>
+
+<h2 id="编辑操作">编辑操作</h2>
+
+<blockquote>
+<p>编辑操作基本上都是基于buffer的，这一小节完全可以归并到buffer里面讲，但涉及到的细节比较多，故而单独拿出来讲。</p>
+</blockquote>
+
+<h3 id="point">Point</h3>
+
+<p>光标位置的重要性不言而喻。</p>
+
+<h4 id="获得point">获得Point</h4>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>(point)</td>
+<td>返回当前的光标位置</td>
+</tr>
+
+<tr>
+<td>(point-min)</td>
+<td>buffer的最开始位置</td>
+</tr>
+
+<tr>
+<td>(point-max)</td>
+<td>buffer的最末尾位置</td>
+</tr>
+
+<tr>
+<td>(line-beginning-position)</td>
+<td>一行最开始的位置</td>
+</tr>
+
+<tr>
+<td>(line-end-position)</td>
+<td>一行最末尾的位置</td>
+</tr>
+
+<tr>
+<td>(region-beginning)</td>
+<td>被选中区域的开始位置</td>
+</tr>
+
+<tr>
+<td>(region-end)</td>
+<td>被选中区域的末尾位置</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li>bobp(beginning of buffer predicate)用来判断是否在buffer头部，eobp(end of buffer predicate)用来判断是否在buffer尾部。</li>
+<li>bolp(beginning of line predicate)用来判断是否在行首，eolp(end of line predicate)用来判断是否在行尾。</li>
+</ol>
+
+<h4 id="光标移动">光标移动</h4>
+
+<ol>
+<li>goto-char:跳转到某个光标位置，<code>(goto-char POSITION)</code>，输入位置参数。</li>
+<li>forward-char/backward-char/forward-word/backward-word/forward-line/backward-line:按单个字符向前或者向后移动；按一个单词向前或者向后移动；按行向前或者向后移动。</li>
+<li>search-forward/search-backward:向前或者向后搜索字符串<code>(search-forward Str)</code>光标移动到Str末尾位置。</li>
+<li>(re-search-forward Regex)/(search-forward-regexp Regex):同上，不过是用的正则查询。同理有：(re-search-backward myRegex) / (search-backward-regexp myRegex)</li>
+<li>beginning-of-buffer/end-of-buffer/beginning-of-line/end-of-line:移动到buffer的起始位置或者末尾位置；移动到一行开始或者结束位置。</li>
+</ol>
+
+<h4 id="thing-at-point">thing-at-point</h4>
+
+<ul>
+<li><strong>thing-at-point</strong>是非常智能的识别当前光标所在位置的字符串类型，并返回这个字符串。比如：<code>(thing-at-point 'email)</code>，如果光标位于形如 xxx@xxx.com的任何位置，都将返回整个&rdquo;xxx@xxx.com&rdquo;字符串。</li>
+<li>可识别的字符串类型：<code>symbol',</code>list&rsquo;, <code>sexp',</code>defun&rsquo;, <code>filename',</code>url&rsquo;, <code>email',</code>word&rsquo;, <code>sentence',</code>whitespace&rsquo;, <code>line',</code>number&rsquo;, `page&rsquo;。</li>
+<li><code>bounds-of-thing-at-point</code>:以点对的形式返回可识别字符串两头的位置。</li>
+</ul>
+
+<h3 id="region-mark">Region/Mark</h3>
+
+<p>region是选择后的区域，以下都是选择区域后的操作。
+1. region-beginning / region-end:区域的开始位置和末尾的位置。
+2. comment-region:注释region。
+3. delete-region/kill-region:删除region。
+4. indent-region:缩进region。
+5. region-active-p:判断region是否活动。</p>
+
+<h3 id="marker">Marker</h3>
+
+<p>Marker是标记，中文直接意译为<strong>马克</strong>，按自己定义的名称在某个地方标记一下，用来快速跳转不同位置：
+1. make-marker:创建空的标记。
+2. set-marker:设置标记的位置和缓冲区<code>(set-marker temp (point))</code>。
+3. point-marker:得到point处的标记。
+4. copy-marker:复制标记
+5. maker-position / marker-buffer:得到一个marker的内容。</p>
+
+<h2 id="window">window</h2>
+
+<p>窗口对象，和操作buffer的函数相似。
+1. selected-window:得到当前光标所在的窗口
+2. window-list:当前frame的window列表
+3. next-window/window-previo:windo-list里面向前一个window和向后一个window
+4. delete-window/delete-other-windows:删除当前window/删除当前其他window
+5. split-window:分割window
+6. current-window-configuration:所谓的window-configuration是当前frame里面的window状态，有几个window，分割成什么样。
+7. set-window-configuration:设置当前窗口配置信息。
+8. walk-windows:遍历窗口
+9. set-window-buffer:让某个窗口显示指定的buffer。
+10. select-window:选择某个窗口。
+11. window-live-p:判断窗口对象是否存在。
+12. window-height/window-width</p>
+
+<h2 id="file-directory">file、directory</h2>
+
+<p>文件和路径操作和buffer一样特别多，而且两者操作互相关联。</p>
+
+<h3 id="file和directory">file和directory</h3>
+
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>find-file</td>
+<td>查找文件</td>
+</tr>
+
+<tr>
+<td>rename-file</td>
+<td>重命名文件</td>
+</tr>
+
+<tr>
+<td>copy-file</td>
+<td>拷贝</td>
+</tr>
+
+<tr>
+<td>delete-file</td>
+<td>删除</td>
+</tr>
+
+<tr>
+<td>copy-directory</td>
+<td>直接拷贝目录</td>
+</tr>
+
+<tr>
+<td>delete-directory</td>
+<td>删除目录</td>
+</tr>
+
+<tr>
+<td>make-directory</td>
+<td>创建目录</td>
+</tr>
+
+<tr>
+<td>write-file</td>
+<td>将buffer内容写入文件</td>
+</tr>
+
+<tr>
+<td>file-exists-p</td>
+<td>判断file在某个路径下是否存在</td>
+</tr>
+
+<tr>
+<td>file-readable-p</td>
+<td>文件是否可读</td>
+</tr>
+
+<tr>
+<td>file-attributes</td>
+<td>返回文件相关的属性</td>
+</tr>
+
+<tr>
+<td>set-file-time</td>
+<td>设置文件的修改时间</td>
+</tr>
+
+<tr>
+<td>set-file-modes</td>
+<td>设置文件模式</td>
+</tr>
+</tbody>
+</table>
+
+<p>从上面可以看出<strong>-p</strong>结尾的函数一般用来判断，p是predicate(谓词)的缩写，去掉<strong>-</strong>这规则也成立:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">numberp</span> <span class="mi">45</span><span class="p">)</span>   <span class="c1">;;==&gt; t</span>
+<span class="p">(</span><span class="nv">stringp</span> <span class="s">&#34;hello&#34;</span><span class="p">)</span> <span class="c1">;;==&gt;t</span>
+<span class="p">(</span><span class="nv">symbolp</span> <span class="ss">&#39;buffer-name</span><span class="p">)</span> <span class="c1">;;==t</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="file-name和directory">file-name和directory</h3>
+
+<ol>
+<li><p>file-name-directory/file-name-nodirectory/file-name-extension:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="lnt">1</span><span class="lnt">2</span><span class="lnt">3</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">file-name-directory</span> <span class="s">&#34;~/wtx/tempfile.txt&#34;</span><span class="p">)</span> <span class="c1">;; =&gt; &#34;~/wts/&#34;</span>
+<span class="p">(</span><span class="nv">file-name-nondirectory</span> <span class="s">&#34;~/wtx/tempfile.txt&#34;</span><span class="p">)</span> <span class="c1">;; =&gt; &#34;tempfile.txt&#34;</span>
+<span class="p">(</span><span class="nv">file-name-extension</span> <span class="s">&#34;~/wtx/tempfile.txt&#34;</span><span class="p">)</span> <span class="c1">;; =&gt; &#34;txt&#34;</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>(expand-file-name filename):得到绝对路径。</p></li>
+
+<li><p>(file-relative-name FilePath dirPath):把绝对路径转换成相对路径，第二参数为相对的路径。</p></li>
+
+<li><p>directory-file-name:获得目录名。</p></li>
+
+<li><p>directory-files / directory-files-attributes:得到某个目录的全部或者符合正则表达式的文件列表directory-files-attributes返回文件列表里面的属性。</p></li>
+</ol>
+
+<h2 id="os-api-操作系统接口">OS API(操作系统接口)</h2>
+
+<blockquote>
+<p>emacs可以与操作系统交互。</p>
+</blockquote>
+
+<h3 id="commands-和-apps">Commands 和 Apps</h3>
+
+<ol>
+<li>shell-command/async-shell-command:执行shell命令，等待shell命令结束或者异步。</li>
+<li>shell-command-to-string:执行命令得带shell命令结束，并获取命令的输出:
+<code>lisp
+(shell-command-to-string &quot;pwd&quot;)  ;;==&gt;&quot;/home/wtx\n&quot;
+</code></li>
+<li>shell-command-on-region:使用外部命令对所选择的区域进行处理。</li>
+<li>call-process/start-process:调用外部程序；开始外部程序。前者同步的，后者异步的。</li>
+<li>call-process-shell-command/start-process-shell-command:使用shell命令同步或者异步打开外部程序。</li>
+</ol>
+
+<h3 id="environment-variables-环境变量">Environment Variables(环境变量)</h3>
+
+<ol>
+<li>getenv:获得当前系统的环境变量值
+<code>lisp
+(getenv &quot;HOME&quot;) ;;==&gt;&quot;/home/wtx&quot;
+</code></li>
+<li>setenv:设置环境变量的值
+<code>lisp
+(getenv &quot;JAVA_HOME&quot; &quot;/usr/local/java&quot;) ;;==&gt;&quot;/usr/local/java&quot;
+(setenv &quot;LANG&quot; &quot;en_US.UTF8&quot;)  ;;==&gt;&quot;en_US.UTF8&quot;
+</code></li>
+<li>system-type:变量，指向当前系统类型。
+<code>lisp
+system-type ;;==&gt;gnu/linux
+</code></li>
+<li>process-environment:当前系统所有环境参数集合，是一个列表，遍历便可以单个变量的名称和相应的值。</li>
+</ol>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">LonglyCode</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2016-02-19</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/emacs/">emacs</a>
+          
+          <a href="/tags/api/">API</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">emacs完全补完计划（五）——歌剧魅影Elisp</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/">
+            <span class="next-text nav-default">emacs完全补完计划（三）——package的引入和管理</span>
+            <span class="prev-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:emoxun8215@gmail.com" rel="me noopener" class="iconfont icon-email"
+        title="email" target="_blank">
+      </a>
+      <a href="https://github.com/LonglyCode" rel="me noopener" class="iconfont icon-github"
+        title="github" target="_blank">
+      </a>
+  <a href="http://LonglyCode.github.io/index.xml" rel="noopener" type="application/rss+xml" class="iconfont icon-rss"
+    title="rss" target="_blank">
+  </a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span><span class="author">LonglyCode</span></span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+<script type="text/javascript" src="/dist/jane.min.js?v=2.7.0"></script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+</body>
+</html>
