@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on 记忆和记忆的补完</title>
+    <link>http://longlycode.github.io/tags/blog/</link>
+    <description>Recent content in Blog on 记忆和记忆的补完</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>LonglyCode</copyright>
+    <lastBuildDate>Mon, 16 Jul 2018 16:01:23 +0800</lastBuildDate>
+    
+	<atom:link href="http://longlycode.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>博客迁移到 HUGO</title>
+      <link>http://longlycode.github.io/post/blog/</link>
+      <pubDate>Mon, 16 Jul 2018 16:01:23 +0800</pubDate>
+      
+      <guid>http://longlycode.github.io/post/blog/</guid>
+      <description>迁移原因 之前不明白别人的博客为什么要迁移来迁移去，迁移完还要发一篇文章简述原因。 后来换了电脑之后，原来的博客代码丢了，才知道对于自己不熟悉而</description>
+    </item>
+    
+  </channel>
+</rss>

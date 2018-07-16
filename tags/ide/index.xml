@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ide on 记忆和记忆的补完</title>
-    <link>http://LonglyCode.github.io/tags/ide/</link>
+    <link>http://longlycode.github.io/tags/ide/</link>
     <description>Recent content in Ide on 记忆和记忆的补完</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>LonglyCode</copyright>
     <lastBuildDate>Tue, 02 Feb 2016 23:30:39 +0000</lastBuildDate>
     
-	<atom:link href="http://LonglyCode.github.io/tags/ide/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://longlycode.github.io/tags/ide/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>emacs完全补完计划（三）——package的引入和管理</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</link>
       <pubDate>Tue, 02 Feb 2016 23:30:39 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</guid>
       <description>&lt;!-- toc --&gt;
 
 &lt;h2 id=&#34;package说明&#34;&gt;package说明&lt;/h2&gt;
@@ -53,10 +53,10 @@
     
     <item>
       <title>emacs完全补完计划（二）——简单配置和设置</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Mon, 01 Feb 2016 23:34:00 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</guid>
       <description>&lt;!-- toc --&gt;
 
 &lt;h2 id=&#34;我们在谈论lisp的时候谈论什么&#34;&gt;我们在谈论lisp的时候谈论什么？&lt;/h2&gt;
@@ -70,10 +70,10 @@
     
     <item>
       <title>emacs完全补完计划（一）——嘴炮和入门</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</link>
       <pubDate>Thu, 28 Jan 2016 00:25:08 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</guid>
       <description>&lt;!-- toc --&gt;
 
 &lt;blockquote&gt;

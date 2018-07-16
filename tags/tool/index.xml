@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tool on 记忆和记忆的补完</title>
-    <link>http://LonglyCode.github.io/tags/tool/</link>
+    <link>http://longlycode.github.io/tags/tool/</link>
     <description>Recent content in Tool on 记忆和记忆的补完</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>LonglyCode</copyright>
     <lastBuildDate>Sun, 24 Jan 2016 23:40:05 +0000</lastBuildDate>
     
-	<atom:link href="http://LonglyCode.github.io/tags/tool/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://longlycode.github.io/tags/tool/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>git使用小结</title>
-      <link>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
+      <link>http://longlycode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
       <pubDate>Sun, 24 Jan 2016 23:40:05 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
+      <guid>http://longlycode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
       <description>&lt;!-- toc --&gt;
 
 &lt;h2 id=&#34;git-一些原理和概念&#34;&gt;git 一些原理和概念&lt;/h2&gt;

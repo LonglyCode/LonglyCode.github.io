@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>记忆和记忆的补完</title>
-    <link>http://LonglyCode.github.io/</link>
+    <link>http://longlycode.github.io/</link>
     <description>Recent content on 记忆和记忆的补完</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>LonglyCode</copyright>
     <lastBuildDate>Mon, 16 Jul 2018 13:38:52 +0800</lastBuildDate>
     
-        <atom:link href="http://LonglyCode.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://longlycode.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>http://LonglyCode.github.io/about/</link>
+      <link>http://longlycode.github.io/about/</link>
       <pubDate>Mon, 16 Jul 2018 13:38:52 +0800</pubDate>
       
-      <guid>http://LonglyCode.github.io/about/</guid>
+      <guid>http://longlycode.github.io/about/</guid>
       
         <description>
 
@@ -40,11 +40,48 @@
     </item>
     
     <item>
+      <title>博客迁移到 HUGO</title>
+      <link>http://longlycode.github.io/post/blog/</link>
+      <pubDate>Mon, 16 Jul 2018 16:01:23 +0800</pubDate>
+      
+      <guid>http://longlycode.github.io/post/blog/</guid>
+      
+        <description>&lt;h1 id=&#34;迁移原因&#34;&gt;迁移原因&lt;/h1&gt;
+
+&lt;p&gt;之前不明白别人的博客为什么要迁移来迁移去，迁移完还要发一篇文章简述原因。
+后来换了电脑之后，原来的博客代码丢了，才知道对于自己不熟悉而且偶尔用的东西，往往累觉不爱。&lt;/p&gt;
+
+&lt;h2 id=&#34;对于-hexo&#34;&gt;对于 HEXO&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;几乎没接触前端，NPM 在新的环境不是强制安装的；&lt;/li&gt;
+&lt;li&gt;NPM 的速度和依赖对于偶尔使用的人体验太差，容易劝退。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;对于-hugo&#34;&gt;对于 HUGO&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;只要一个编译好的可执行文件，可以扔到不同的环境当中；&lt;/li&gt;
+&lt;li&gt;使用 go 一段时间了；&lt;/li&gt;
+&lt;li&gt;生成博客的速度快；&lt;/li&gt;
+&lt;li&gt;支持 org-mode；&lt;/li&gt;
+&lt;li&gt;工程结构很清晰，主题在单独的文件夹当中，直接依赖 github 项目，太棒。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;迁移过程&#34;&gt;迁移过程&lt;/h2&gt;
+
+&lt;p&gt;网上已经很多，下面这篇挺不错的：
+  &lt;a href=&#34;http://keithmo.me/post/2016/07/20/build-your-own-blog1/&#34; title=&#34; GitHub + Hugo 搭建个人博客&#34;&gt; GitHub + Hugo 搭建个人博客&lt;/a&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>初识postgresql以及在Flask里面的关联使用</title>
-      <link>http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</link>
+      <link>http://longlycode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 19 Apr 2016 00:50:21 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://longlycode.github.io/post/%E5%88%9D%E8%AF%86postgresql%E4%BB%A5%E5%8F%8A%E5%9C%A8flask%E9%87%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E8%81%94%E4%BD%BF%E7%94%A8/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -343,10 +380,10 @@ psql -h 127.0.0.1 -p 5442 -U hehe -d hehe
     
     <item>
       <title>emacs完全补完计划（五）——歌剧魅影Elisp</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/</link>
       <pubDate>Sun, 28 Feb 2016 20:18:06 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%94/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -892,10 +929,10 @@ elisp的正则语法和其他语言基本一致，但有一点特别丑陋，像
     
     <item>
       <title>emacs完全补完计划(四)--API大考古</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</link>
       <pubDate>Fri, 19 Feb 2016 23:36:37 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E5%9B%9B-1/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -1488,10 +1525,10 @@ system-type ;;==&amp;gt;gnu/linux
     
     <item>
       <title>emacs完全补完计划（三）——package的引入和管理</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</link>
       <pubDate>Tue, 02 Feb 2016 23:30:39 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%89/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -1704,10 +1741,10 @@ use-package还有很多关键字，比如指定某些条件下才会加载packag
     
     <item>
       <title>emacs完全补完计划（二）——简单配置和设置</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Mon, 01 Feb 2016 23:34:00 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92%E4%BA%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E5%92%8C%E8%AE%BE%E7%BD%AE/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -1874,10 +1911,10 @@ use-package还有很多关键字，比如指定某些条件下才会加载packag
     
     <item>
       <title>emacs完全补完计划（一）——嘴炮和入门</title>
-      <link>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</link>
+      <link>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</link>
       <pubDate>Thu, 28 Jan 2016 00:25:08 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</guid>
+      <guid>http://longlycode.github.io/post/emacs%E5%AE%8C%E5%85%A8%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92-%E4%B8%80-1/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -2120,10 +2157,10 @@ use-package还有很多关键字，比如指定某些条件下才会加载packag
     
     <item>
       <title>Org-mode个人总结</title>
-      <link>http://LonglyCode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</link>
+      <link>http://longlycode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</link>
       <pubDate>Mon, 25 Jan 2016 22:48:14 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://longlycode.github.io/post/org-mode%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -2422,10 +2459,10 @@ WAIT(w@/!) 注意看括号里面，w 代表改成 WAIT 状态时候的快捷键�
     
     <item>
       <title>git使用小结</title>
-      <link>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
+      <link>http://longlycode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
       <pubDate>Sun, 24 Jan 2016 23:40:05 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
+      <guid>http://longlycode.github.io/post/git%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -2527,10 +2564,10 @@ WAIT(w@/!) 注意看括号里面，w 代表改成 WAIT 状态时候的快捷键�
     
     <item>
       <title>python进阶知识总览</title>
-      <link>http://LonglyCode.github.io/post/python%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88/</link>
+      <link>http://longlycode.github.io/post/python%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88/</link>
       <pubDate>Thu, 21 Jan 2016 17:52:11 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/python%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88/</guid>
+      <guid>http://longlycode.github.io/post/python%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88/</guid>
       
         <description>&lt;!-- toc --&gt;
 
@@ -2633,10 +2670,10 @@ WAIT(w@/!) 注意看括号里面，w 代表改成 WAIT 状态时候的快捷键�
     
     <item>
       <title>python基础零碎笔记</title>
-      <link>http://LonglyCode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/</link>
+      <link>http://longlycode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 20 Jan 2016 11:54:22 +0000</pubDate>
       
-      <guid>http://LonglyCode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://longlycode.github.io/post/python%E5%9F%BA%E7%A1%80%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/</guid>
       
         <description>&lt;!-- toc --&gt;
 

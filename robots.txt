@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://LonglyCode.github.io/sitemap.xml
+Sitemap: http://longlycode.github.io/sitemap.xml
