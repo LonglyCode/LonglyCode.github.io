@@ -719,7 +719,27 @@ psql -h 127.0.0.1 -p 5442 -U hehe -d hehe
 
   
 
-  
+  <div class="post bg-white">
+      <div id="comments-gitment"></div>
+      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+      <script type="text/javascript">
+      const gitment = new Gitment({
+        id: '初识postgresql以及在Flask里面的关联使用.md',
+        title: '初识postgresql以及在Flask里面的关联使用',
+        link: decodeURI(location.href),
+        desc: '\x3c!-- toc --\x3e\n\n\x3cblockquote\x3e\n\x3cp\x3e起因发现同一个服务器上面有人安装了postgresql用来跑一个大型的应用，postgresql如雷贯耳，一直没机会接触，于是好奇折腾了起来。因为牵扯众多只挑重点来讲。\x3c\/p\x3e\n\x3c\/blockquote\x3e\n\n\x3cp\x3e\x3c\/p\x3e',
+        owner: 'LonglyCode',
+        repo: 'LonglyCode\/comment-for-blog',
+        oauth: {
+          client_id: 'b1189abdf769cc002fba',
+          client_secret: '4285e358178cdcf7f128371b332319249c1fbdda'
+        }
+      })
+      gitment.render('comments-gitment')
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+    </div>
 
   
 

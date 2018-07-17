@@ -702,7 +702,27 @@ use-package还有很多关键字，比如指定某些条件下才会加载packag
 
   
 
-  
+  <div class="post bg-white">
+      <div id="comments-gitment"></div>
+      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+      <script type="text/javascript">
+      const gitment = new Gitment({
+        id: 'emacs完全补完计划-三.md',
+        title: 'emacs完全补完计划（三）——package的引入和管理',
+        link: decodeURI(location.href),
+        desc: '\x3c!-- toc --\x3e\n\n\x3ch2 id=\x22package说明\x22\x3epackage说明\x3c\/h2\x3e\n\n\x3cblockquote\x3e\n\x3cp\x3eemacs中package（包）和其他编辑器一样，把一些功能或者特性包装成为一个package。\x3c\/p\x3e\n\x3c\/blockquote\x3e\n\n\x3ch3 id=\x22package存放在哪里\x22\x3epackage存放在哪里？\x3c\/h3\x3e\n\n\x3cp\x3e有package那么肯定需要知道存放在哪里，现在公认有两个稳定的仓库分别是ELPA和MELPA，当然也可以去emacswiki或者github 上直接下载。下面的程序在emacs24以上的版本下有用，将它加入到init.el文件里面去：\x3c\/p\x3e\n\x3cdiv class=\x22highlight\x22\x3e\x3cdiv class=\x22chroma\x22\x3e\n\x3ctable class=\x22lntable\x22\x3e\x3ctr\x3e\x3ctd class=\x22lntd\x22\x3e\n\x3cpre class=\x22chroma\x22\x3e\x3ccode class=\x22language-lisp\x22 data-lang=\x22lisp\x22\x3e\x3cspan class=\x22lnt\x22\x3e 1\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 2\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 3\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 4\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 5\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 6\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 7\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 8\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e 9\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e10\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e11\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e12\x3c\/span\x3e\x3cspan class=\x22lnt\x22\x3e13\x3c\/span\x3e\x3c\/code\x3e\x3c\/pre\x3e\x3c\/td\x3e\n\x3ctd class=\x22lntd\x22\x3e\n\x3cpre class=\x22chroma\x22\x3e\x3ccode class=\x22language-lisp\x22 data-lang=\x22lisp\x22\x3e\x3cspan class=\x22c1\x22\x3e;;内置的package管理，emacs24以上的版本有用\x3c\/span\x3e\n\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3erequire\x3c\/span\x3e \x3cspan class=\x22ss\x22\x3e\x26#39;package\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e\n\x3cspan class=\x22c1\x22\x3e;;将melpa仓库地址加入到package-archives这个列表变量里面\x3c\/span\x3e\n\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3eadd-to-list\x3c\/span\x3e \x3cspan class=\x22ss\x22\x3e\x26#39;package-archives\x3c\/span\x3e\n    \x3cspan class=\x22o\x22\x3e\x26#39;\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22s\x22\x3e\x26#34;melpa\x26#34;\x3c\/span\x3e \x3cspan class=\x22o\x22\x3e.\x3c\/span\x3e \x3cspan class=\x22s\x22\x3e\x26#34;http:\/\/melpa.org\/packages\/\x26#34;\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e \x3cspan class=\x22no\x22\x3et\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e\n\x3cspan class=\x22c1\x22\x3e;;这个是国内一个elpa仓库镜像，速度更快一些，你懂得\x3c\/span\x3e\n\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3eadd-to-list\x3c\/span\x3e \x3cspan class=\x22ss\x22\x3e\x26#39;package-archives\x3c\/span\x3e \n    \x3cspan class=\x22o\x22\x3e\x26#39;\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22s\x22\x3e\x26#34;popkit\x26#34;\x3c\/span\x3e \x3cspan class=\x22o\x22\x3e.\x3c\/span\x3e \x3cspan class=\x22s\x22\x3e\x26#34;http:\/\/elpa.popkit.org\/packages\/\x26#34;\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e \x3cspan class=\x22no\x22\x3et\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e\n\x3cspan class=\x22c1\x22\x3e;;初始化package\x3c\/span\x3e\n\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3epackage-initialize\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e\n\x3cspan class=\x22c1\x22\x3e;;更新仓库里面的package\x3c\/span\x3e\n\x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3ewhen\x3c\/span\x3e \x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3enot\x3c\/span\x3e \x3cspan class=\x22nv\x22\x3epackage-archive-contents\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e)\x3c\/span\x3e\n  \x3cspan class=\x22p\x22\x3e(\x3c\/span\x3e\x3cspan class=\x22nv\x22\x3epackage-refresh-contents\x3c\/span\x3e\x3cspan class=\x22p\x22\x3e))\x3c\/span\x3e\x3c\/code\x3e\x3c\/pre\x3e\x3c\/td\x3e\x3c\/tr\x3e\x3c\/table\x3e\n\x3c\/div\x3e\n\x3c\/div\x3e\n\x3cp\x3e\x3c\/p\x3e',
+        owner: 'LonglyCode',
+        repo: 'LonglyCode\/comment-for-blog',
+        oauth: {
+          client_id: 'b1189abdf769cc002fba',
+          client_secret: '4285e358178cdcf7f128371b332319249c1fbdda'
+        }
+      })
+      gitment.render('comments-gitment')
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+    </div>
 
   
 

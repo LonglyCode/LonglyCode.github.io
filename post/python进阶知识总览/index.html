@@ -513,7 +513,27 @@
 
   
 
-  
+  <div class="post bg-white">
+      <div id="comments-gitment"></div>
+      <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+        <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+      <script type="text/javascript">
+      const gitment = new Gitment({
+        id: 'python进阶知识总览.md',
+        title: 'python进阶知识总览',
+        link: decodeURI(location.href),
+        desc: '\x3c!-- toc --\x3e\n\n\x3cblockquote\x3e\n\x3cp\x3e有些人学完python之后不知道能干些什么或者要干些什么，实际上python本身语言很容易入门，如果不是\x3cstrong\x3e按需学习\x3c\/strong\x3e就无法更上一层。正如有人抱怨的如今学完一门成熟的语言其实不难，难的是需要花费很多时间去了解它的生态，比如内置库还有第三方库的用法，以及各种成型的流行的框架的使用。有个网站统计开源库所使用库的流行程度，链接在这里\x3ca href=\x22http:\/\/www.programcreek.com\/python\/index\/module\/list\x22\x3epython流行库排行\x3c\/a\x3e。我也是通过这个网站才想到自己有了解过许多的库但是总是零零洒洒，不成体系，所以个人归纳分类了一下，决定每个库都要去实践和记录一下，好记性不如烂笔头。感兴趣的可以关注\x3ca href=\x22http:\/\/longlycode.github.io\/\x22\x3e我的博客\x3c\/a\x3e，会尽量把坑填完。\x3c\/p\x3e\n\x3c\/blockquote\x3e\n\n\x3cp\x3e\x3c\/p\x3e',
+        owner: 'LonglyCode',
+        repo: 'LonglyCode\/comment-for-blog',
+        oauth: {
+          client_id: 'b1189abdf769cc002fba',
+          client_secret: '4285e358178cdcf7f128371b332319249c1fbdda'
+        }
+      })
+      gitment.render('comments-gitment')
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+    </div>
 
   
 
