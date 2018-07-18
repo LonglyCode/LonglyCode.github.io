@@ -82,6 +82,7 @@
 &lt;li&gt;vimdiff 对于的熟悉vim的人进行两个文件临时diff简直是神器&lt;/li&gt;
 &lt;li&gt;tcpdump&lt;/li&gt;
 &lt;li&gt;dig&lt;/li&gt;
+&lt;li&gt;用sed命令批量替换某个路径下的字符， &lt;code&gt;grep 原字符串 -rl 所在目录&lt;/code&gt; | xargs sed -i &amp;ldquo;s/原字符串/新字符串/g&amp;rdquo;`&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&#34;备忘&#34;&gt;备忘&lt;/h2&gt;
@@ -89,6 +90,8 @@
 &lt;ol&gt;
 &lt;li&gt;emacs直接安装需要安装依赖: &lt;code&gt;sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;svn 进行某一部分的目录单独更新：一，对父目录进行&lt;code&gt;svn checkout svn://svn.oa.com/SrcCodes/trunk/ --depth &#39;immediates&#39;&lt;/code&gt;，二，到对应的想更新的路径操作&lt;code&gt;svn up --set-depth &#39;infinity&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;查看mysql数据库对应的用户和ip的权限: &lt;code&gt;select DISTINCT(&lt;/code&gt;GRANTEE&lt;code&gt;) from&lt;/code&gt;information_schema&lt;code&gt;.&lt;/code&gt;USER_PRIVILEGES&lt;code&gt;;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设置用户mysql权限 &lt;code&gt;GRANT insert,update,select,delect PRIVILEGES ON &amp;lt;dbname&amp;gt;.* TO &#39;user@&#39;192.168.%.%&#39; identified by &#39;password&#39;;&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;</description>
       
     </item>

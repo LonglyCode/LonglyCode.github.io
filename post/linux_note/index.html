@@ -94,7 +94,7 @@
 
 <meta itemprop="datePublished" content="2018-07-17T11:48:14&#43;00:00" />
 <meta itemprop="dateModified" content="2018-07-17T11:48:14&#43;00:00" />
-<meta itemprop="wordCount" content="806">
+<meta itemprop="wordCount" content="913">
 
 
 
@@ -320,7 +320,7 @@
       <div class="post-meta">
         <span class="post-time"> 2018-07-17 </span>
         
-        <span class="more-meta"> 806 words </span>
+        <span class="more-meta"> 913 words </span>
         <span class="more-meta"> 2 min read </span>
       </div>
     </header>
@@ -381,6 +381,7 @@
 <li>vimdiff 对于的熟悉vim的人进行两个文件临时diff简直是神器</li>
 <li>tcpdump</li>
 <li>dig</li>
+<li>用sed命令批量替换某个路径下的字符， <code>grep 原字符串 -rl 所在目录</code> | xargs sed -i &ldquo;s/原字符串/新字符串/g&rdquo;`</li>
 </ol>
 
 <h2 id="备忘">备忘</h2>
@@ -388,6 +389,8 @@
 <ol>
 <li>emacs直接安装需要安装依赖: <code>sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libncurses-dev</code></li>
 <li>svn 进行某一部分的目录单独更新：一，对父目录进行<code>svn checkout svn://svn.oa.com/SrcCodes/trunk/ --depth 'immediates'</code>，二，到对应的想更新的路径操作<code>svn up --set-depth 'infinity'</code></li>
+<li>查看mysql数据库对应的用户和ip的权限: <code>select DISTINCT(</code>GRANTEE<code>) from</code>information_schema<code>.</code>USER_PRIVILEGES<code>;</code></li>
+<li>设置用户mysql权限 <code>GRANT insert,update,select,delect PRIVILEGES ON &lt;dbname&gt;.* TO 'user@'192.168.%.%' identified by 'password';</code></li>
 </ol>
     </div>
 
