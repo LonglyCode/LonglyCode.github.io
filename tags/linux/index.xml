@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 记忆和记忆的补完</title>
+    <link>http://longlycode.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 记忆和记忆的补完</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>LonglyCode</copyright>
+    <lastBuildDate>Tue, 17 Jul 2018 11:48:14 +0000</lastBuildDate>
+    
+	<atom:link href="http://longlycode.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux使用的点点滴滴</title>
+      <link>http://longlycode.github.io/post/linux_note/</link>
+      <pubDate>Tue, 17 Jul 2018 11:48:14 +0000</pubDate>
+      
+      <guid>http://longlycode.github.io/post/linux_note/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;完全Linux下工作已经接近一年半的时间，中间零零碎碎记录一些好的东西和遇到的坑。有些只是为了记录而记录，网上都提到就不提了。持续更新&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
