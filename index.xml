@@ -83,6 +83,7 @@
 &lt;li&gt;tcpdump&lt;/li&gt;
 &lt;li&gt;dig&lt;/li&gt;
 &lt;li&gt;用sed命令批量替换某个路径下的字符， &lt;code&gt;grep 原字符串 -rl 所在目录&lt;/code&gt; | xargs sed -i &amp;ldquo;s/原字符串/新字符串/g&amp;rdquo;`&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;httpie&lt;/code&gt;替代curl或者postman，可以将request data 通过管道导入， &lt;code&gt;cat xxxx.json | sudo http -b POST :8080/xxxxx/xxxx\?token=kjl\&amp;amp;uid=uid2&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&#34;备忘&#34;&gt;备忘&lt;/h2&gt;
@@ -92,6 +93,20 @@
 &lt;li&gt;svn 进行某一部分的目录单独更新：一，对父目录进行&lt;code&gt;svn checkout svn://svn.oa.com/SrcCodes/trunk/ --depth &#39;immediates&#39;&lt;/code&gt;，二，到对应的想更新的路径操作&lt;code&gt;svn up --set-depth &#39;infinity&#39;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;查看mysql数据库对应的用户和ip的权限: &lt;code&gt;select DISTINCT(&lt;/code&gt;GRANTEE&lt;code&gt;) from&lt;/code&gt;information_schema&lt;code&gt;.&lt;/code&gt;USER_PRIVILEGES&lt;code&gt;;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;设置用户mysql权限 &lt;code&gt;GRANT insert,update,select,delect PRIVILEGES ON &amp;lt;dbname&amp;gt;.* TO &#39;user@&#39;192.168.%.%&#39; identified by &#39;password&#39;;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;mysql 安装和使用：
+
+&lt;ul&gt;
+&lt;li&gt;apt-get install mysql-server&lt;/li&gt;
+&lt;li&gt;apt-get install mysql-client&lt;/li&gt;
+&lt;li&gt;apt-get install python-mysqldb
+接着使用&lt;code&gt;mysql -u root -p&lt;/code&gt;进入客户端，然后输入密码，记得安装过程会提示你输入密码；&lt;code&gt;create database [databasename]&lt;/code&gt;，注意mysql需要设置为中文，加后缀&lt;code&gt;create database [databasename] character set gbk&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;在新的设备上把SSH密钥添加到个人github账号的方式：&lt;code&gt;ssh-keygen -t rsa -C your@email.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设置autojump，一般从github上下载源码，然后在&lt;code&gt;.zshrc&lt;/code&gt;文件下添加autojump插件，最重要的是要添加下面两句:
+&lt;code&gt;shell
+[[ -s /home/xxxx/.autojump/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; source /home/xxxx/.autojump/etc/profile.d/autojump.sh
+&lt;/code&gt;
+最后运行 &lt;code&gt;source .zshrc&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;</description>
       
     </item>
@@ -2883,7 +2898,38 @@ WAIT(w@/!) 注意看括号里面，w 代表改成 WAIT 状态时候的快捷键�
 &lt;ol&gt;
 &lt;li&gt;sorted(a, key=lambda result: result[0],reverse=True) ，这个排序居然跟 lisp 里面很像，基本抄过来的。在 key 里面定义一个匿名函数，在函数里面自定排序规则，因为输入参数默认为 a（sorted 的第一个参数），所以使用匿名函数时可以使用 map 等提取单独元素，完整方法以及参数 sorted(data, cmp=None, key=None, reverse=False)&lt;/li&gt;
 &lt;li&gt;operator.itemgetter函数获取的不是值，而是定义了一个函数，通过该函数作用到对象上才能获取值。所以sorted(aa.items(),key=itemgetter(1)) 是对字典 aa 的value值进行排序，使用之前 from operator import itemgetter&lt;/li&gt;
-&lt;/ol&gt;</description>
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;10-yield-from&#34;&gt;10. yield from&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;yield from 更像是一种约定，把异步任务以协程发出去，然后等待结果返回，可以在结果返回上下文做文章。至于怎么知道结果到了，就需要事件循环来调度，某种任务协议来驱动。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;ps：更像执行体和调用方直接建立了管道。&lt;/p&gt;
+
+&lt;h2 id=&#34;11-可变对象copy&#34;&gt;11. 可变对象copy&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;b = range(9);a=[];a[:]=b等同于a=copy.decopy(b)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;12-将某个包全局化&#34;&gt;12. 将某个包全局化&lt;/h2&gt;
+
+&lt;p&gt;(不建议这么做)
+&lt;code&gt;import site;site.getsitepackages()&lt;/code&gt;可以看到安装系统package的位置，&lt;code&gt;.pth&lt;/code&gt;结尾的文件可以将本地python包的绝对位置暴露给全局，把&lt;code&gt;.pth&lt;/code&gt;文件放到 &lt;code&gt;site.getsitepackages&lt;/code&gt;所返回的路径当中即可。&lt;code&gt;sys.path&lt;/code&gt;返回的是&lt;code&gt;PYTHONPATH&lt;/code&gt;变量指向的位置。&lt;/p&gt;
+
+&lt;h2 id=&#34;13-关于-import&#34;&gt;13. 关于&lt;code&gt;__import__&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;__import__&lt;/code&gt;方法其实就是import的原型，只不过前者接收的是字符串，而且在导入package.module，返回的是package而不是module，建议用importlib中的import_module替代。&lt;code&gt;sys.modules&lt;/code&gt;是一个包含了当前解释器的所有导入模块的字典。&lt;/p&gt;
+
+&lt;h2 id=&#34;14-pkgutil&#34;&gt;14. pkgutil&lt;/h2&gt;
+
+&lt;p&gt;如果要获取包里面的所有模块列表，不应该用 os.listdir()，而是 pkgutil 模块。&lt;/p&gt;
+
+&lt;h2 id=&#34;15-关于闭包&#34;&gt;15. 关于闭包&lt;/h2&gt;
+
+&lt;p&gt;至少有两种主要方式来捕获和保存状态信息,你可以在一个对象实例 (通过一个绑定方法) 或者在一个闭包中保存它。&lt;/p&gt;</description>
       
     </item>
     

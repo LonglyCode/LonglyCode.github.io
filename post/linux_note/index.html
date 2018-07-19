@@ -72,7 +72,7 @@
 
 <meta property="article:published_time" content="2018-07-17T11:48:14&#43;00:00"/>
 
-<meta property="article:modified_time" content="2018-07-17T11:48:14&#43;00:00"/>
+<meta property="article:modified_time" content="2018-07-19T17:06:11&#43;00:00"/>
 
 
 
@@ -94,7 +94,7 @@
 
 <meta itemprop="datePublished" content="2018-07-17T11:48:14&#43;00:00" />
 <meta itemprop="dateModified" content="2018-07-17T11:48:14&#43;00:00" />
-<meta itemprop="wordCount" content="913">
+<meta itemprop="wordCount" content="1198">
 
 
 
@@ -320,8 +320,8 @@
       <div class="post-meta">
         <span class="post-time"> 2018-07-17 </span>
         
-        <span class="more-meta"> 913 words </span>
-        <span class="more-meta"> 2 min read </span>
+        <span class="more-meta"> 1198 words </span>
+        <span class="more-meta"> 3 min read </span>
       </div>
     </header>
 
@@ -382,6 +382,7 @@
 <li>tcpdump</li>
 <li>dig</li>
 <li>用sed命令批量替换某个路径下的字符， <code>grep 原字符串 -rl 所在目录</code> | xargs sed -i &ldquo;s/原字符串/新字符串/g&rdquo;`</li>
+<li>使用<code>httpie</code>替代curl或者postman，可以将request data 通过管道导入， <code>cat xxxx.json | sudo http -b POST :8080/xxxxx/xxxx\?token=kjl\&amp;uid=uid2</code></li>
 </ol>
 
 <h2 id="备忘">备忘</h2>
@@ -391,6 +392,20 @@
 <li>svn 进行某一部分的目录单独更新：一，对父目录进行<code>svn checkout svn://svn.oa.com/SrcCodes/trunk/ --depth 'immediates'</code>，二，到对应的想更新的路径操作<code>svn up --set-depth 'infinity'</code></li>
 <li>查看mysql数据库对应的用户和ip的权限: <code>select DISTINCT(</code>GRANTEE<code>) from</code>information_schema<code>.</code>USER_PRIVILEGES<code>;</code></li>
 <li>设置用户mysql权限 <code>GRANT insert,update,select,delect PRIVILEGES ON &lt;dbname&gt;.* TO 'user@'192.168.%.%' identified by 'password';</code></li>
+<li>mysql 安装和使用：
+
+<ul>
+<li>apt-get install mysql-server</li>
+<li>apt-get install mysql-client</li>
+<li>apt-get install python-mysqldb
+接着使用<code>mysql -u root -p</code>进入客户端，然后输入密码，记得安装过程会提示你输入密码；<code>create database [databasename]</code>，注意mysql需要设置为中文，加后缀<code>create database [databasename] character set gbk</code></li>
+</ul></li>
+<li>在新的设备上把SSH密钥添加到个人github账号的方式：<code>ssh-keygen -t rsa -C your@email.com</code></li>
+<li>设置autojump，一般从github上下载源码，然后在<code>.zshrc</code>文件下添加autojump插件，最重要的是要添加下面两句:
+<code>shell
+[[ -s /home/xxxx/.autojump/etc/profile.d/autojump.sh ]] &amp;&amp; source /home/xxxx/.autojump/etc/profile.d/autojump.sh
+</code>
+最后运行 <code>source .zshrc</code>。</li>
 </ol>
     </div>
 
@@ -403,7 +418,7 @@
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2018-07-17</span>
+    <span class="item-content">2018-07-19</span>
   </p>
   
   <p class="copyright-item">
